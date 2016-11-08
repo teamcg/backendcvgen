@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>EDENZ Job Seekers</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="./css/main.css" rel="stylesheet">
+  </head>
+  <body>
+
+
+    <div class="container">
+		<!-- <div class="col-md-4 col-sm-3 col-xs-3"></div> -->
+		<div class="col-md-12 col-sm-12 col-xs-12" align="middle">
+			<img src="images/logoPassGen.png" style="">
+		</div>
+		
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<form action="/authkeygen" method="POST" class="form-signin">
+				<input type="text" name="genauthkey[studentid]" id="username" class="form-control" placeholder="Student ID" required autofocus>
+				<input type="text" name ="genauthkey[authkey]" id = "password" class="form-control" placeholder="Authentication Code" required>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">
+					Generate Code
+				</button>
+				<a href="/">
+					Back
+				</a>
+			</form>
+		</div>
+
+    </div> <!-- /container -->
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<% include partials/header %>
+
+
+
+    <div class="container">
+		<!-- <div class="col-md-4 col-sm-3 col-xs-3"></div> -->
+		<div class="col-md-12 col-sm-12 col-xs-12" align="middle">
+			<img src="images/logoLogin.png" style="">
+		</div>
+		
+		
+		<div class="col-md-5 col-sm-5 col-xs-5">
+
+		  <form action="/login" method="POST" class="form-signin">
+			<h2 class="form-signin-heading">Please sign in</h2>
+
+			<input type="text" name="username" id="username" class="form-control" placeholder="Student ID" required autofocus>
+
+			<input type="password" name ="password" id ="password" class="form-control" placeholder="Password" required>
+			<div class="checkbox">
+			  <label>
+				<input type="checkbox" value="remember-me">Remember me</input>
+			  </label>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<label> </label>
+			<a>Forgot your password?</a>
+		  </form>
+		  
+		</div>
+		
+		<div class="col-md-2 col-sm-2 col-xs-2" align="middle">
+			<img src="images/split.png" style="height:300px;">
+		</div>
+		
+
+
+		<div class="col-md-5 col-sm-5 col-xs-5">
+		  <form action="/reg" method="POST" class="form-signin">
+			<h2 class="form-signin-heading">
+				Register
+			</h2>
+			<input type="text" name="regstudentid" id="username" class="form-control" placeholder="Student ID" required autofocus>
+			<input type="password" name ="regauthkey" id ="password" class="form-control" placeholder="Authorization Code" required>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+		  </form>
+		</div>
+
+
+
+
+    </div> <!-- /container -->
+<div class="container text-center">
+	<a href="/allstudent">
+		<button class="btn btn-default">View All Students</button>
+	</a>
+
+	<a href="/allauthkey">
+	  <button class="btn btn-default">View All AuthKeys</button>
+	</a>
+
+	<a href="/gentempkey">
+	  <button class="btn btn-default">Generate Authorization Code</button>
+	</a>
+
+	<a href="/forgotpass">
+	  <button class="btn btn-default">Forgot Password?</button>
+	</a>
+</div>
+
+
+
+
+
+
+
+
+<% include partials/footer %>

@@ -1,0 +1,65 @@
+<% include partials/header %>
+
+<div class="container">
+  	<h1 class="text-center">Register</h1>
+
+
+  <form class="form-horizontal" action="/signup" method="POST">
+   <div class="form-group">
+      <label for="studentid" class="col-sm-2 control-label">Student ID</label>
+      <div class="col-sm-10">
+        <input type="number" name="username" class="form-control" id="studentid" value="<%= foundStudent.studentid %>" readonly>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="authKey" class="col-sm-2 control-label">Authorization Key</label>
+      <div class="col-sm-10">
+        <input type="text" name="authkey" class="form-control" id="authKey" value="<%= foundStudent.authkey %>" readonly >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="fullname" class="col-sm-2 control-label">Fullname</label>
+      <div class="col-sm-10">
+        <input type="text" name="fullname" class="form-control" id="fullname" placeholder="Fullname" required>
+      </div>
+    </div>
+ 
+    <div class="form-group">
+      <label for="email" class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email" name="email" class="form-control" id="email" placeholder="Email" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" name="password" class="form-control" id="pass1" placeholder="Password" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword" class="col-sm-2 control-label">Confirm Password</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" id="pass2" placeholder="Confirm Password" onkeyup="checkPass();" required>
+          <span id="confirmMessage" class="confirmMessage"></span>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default" id="buttonSubmit" disabled="true">Submit</button>
+      </div>
+    </div>
+  </form> 
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<% include partials/footer %>
