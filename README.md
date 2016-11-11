@@ -34,6 +34,13 @@ Nov 9 <br>
 -- Added password validation functionality
 
 
+Nov 11 <br>
+-- Added POST request in '/test', this is for testing purposes before merging it into the actual program <br>
+-- added input field (fullname, address, mobilenumber, email and skills[array])
+-- added new model 'cv'
+
 
 Cheers! <br>
 
+-John Lois Frades <br>
+-CV Gen prototype

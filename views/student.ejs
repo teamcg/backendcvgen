@@ -1,6 +1,7 @@
 <% include partials/header %>
 
 
+
 <h1><%= currentUser.fullname %></h1>
 
 
@@ -22,7 +23,7 @@
 
 
 
-  <div class="container col-sm-8 col-sm-offset-2">
+  <!-- <div class="container col-sm-8 col-sm-offset-2">
 		<div class="row">
 				<h2>My Profile</h2>
 		</div>
@@ -250,6 +251,33 @@
 			</div>
 		</div>
 		</form>
-		</div>
+		</div> -->
+
+
+
+
+
+
+
+
+
+
+<form action="/test" method="POST">
+<div id='wrapper'>
+	<input type="text" name="cv[fullname]" placeholder="fullname">
+	<input type="text" name="cv[address]" placeholder="address">
+	<input type="number" name="cv[mobilenumber]" placeholder="mobile#">
+	<input type="text" name="cv[email]" placeholder="email">
+	<input type="text" name="cv[skills]" placeholder="skills">
+	<button type="button" onclick='addmore()'>Add more skills</button>
+	<button>Submit</button>
+</div>
+
+
+</form>
+
+
+
+
 
 <% include partials/footer %>

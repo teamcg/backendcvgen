@@ -23,6 +23,7 @@ var app = express();
 //Import the models
 var Student = require('./models/student');
 var AuthKey = require('./models/authkey');
+var CV = require('./models/cv');
 
 
 //Import the routes

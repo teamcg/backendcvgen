@@ -16,3 +16,10 @@ function checkPass(){
       message.innerHTML = "Confirm password doesn't match!"
      }
 } 
+
+
+function addmore() {
+    var newspan = document.createElement('span');
+    newspan.innerHTML = '<input type="text" name="cv[skills]" placeholder="skills">';
+    document.getElementById('wrapper').appendChild(newspan);
+}
