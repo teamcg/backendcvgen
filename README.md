@@ -40,6 +40,11 @@ Nov 11 <br>
 -- added new model 'cv'
 
 
+Nov 12 <br>
+-- Added profile input and skills input in student page <br>
+-- Reworked 'StudentSchema', where i added mobilenumber, address and email <br>
+-- Generated word document with: Fullname, address, mobile number, email and skills <br>
+
 Cheers! <br>
 
 -John Lois Frades <br>

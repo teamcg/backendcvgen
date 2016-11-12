@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Student = require('../models/student');
 var AuthKey = require('../models/authkey');
+var CV = require('../models/cv');
 var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
@@ -28,10 +29,15 @@ router.get('/student', function(req, res){
     if(err){
       console.log(err);
     } else {
-      res.render('student', {files: files});
+      Student.findById(req.user.id).populate('cv').exec(function(err, theStudent){
+        if(err){
+          console.log(err);
+        } else {
+          res.render('student', {files: files, theStudent: theStudent});
+        }
+      })
     }
   });
-	
 });
 
 
@@ -55,6 +61,17 @@ router.post('/register', function(req, res){
 	});
 });
 
+
+router.post('/profile', function(req,res){
+  Student.findByIdAndUpdate(req.user.id, req.body.studentprofile, function(err, studentProfile){
+    if(err){
+      console.log(err);
+    } else {
+      console.log('Student profile sucessfully updated');
+      res.redirect('back');
+    }
+  });
+});
 
 
 router.post('/signup', function(req, res) {
@@ -200,18 +217,25 @@ router.post('/reset/:token', function(req, res) {
 
 
 
-router.post('/genword', function(req, res){
+router.post('/', function(req, res){
   Student.findOne({username: req.user.username}, function(err, theStudent){
     var docx = officegen('docx');
 
-    var pObj = docx.createP();
-    pObj.addText(theStudent.fullname.toString());
-    pObj.addLineBreak();
-    pObj.addText('Student ID# ' + theStudent.username.toString());
-    pObj.addLineBreak();
-    pObj.addText(theStudent.email.toString(), {color: 'red'});
+    var pObjHead = docx.createP();
+    pObjHead.addText(theStudent.fullname.toString(), {bold: true, font_size: 20, font_face: 'Arial'});
+    pObjHead.addLineBreak();
+    pObjHead.addText(theStudent.address.toString(), {font_size: 12, font_face: 'Arial'});
+    pObjHead.addLineBreak();
+    pObjHead.addText('Mobile# ' + theStudent.mobilenumber.toString(), {font_size: 12, font_face: 'Arial'});
+    pObjHead.addLineBreak();
+    pObjHead.addText('Email: ' + theStudent.email.toString(), {font_size: 12, font_face: 'Arial'});
 
-
+    var pObjSkills = docx.createP();
+    pObjSkills.addText('Skills', {font_size: 16, font_face: 'Arial', underline: true});
+    pObjSkills.addLineBreak();
+    theStudent.cv.forEach(function(studentCV){
+      console.log(studentCV);
+    });
 
     var named = './CV/' + theStudent.fullname + '.' + theStudent.username + '/' + 'CV.docx'
     var out = fs.createWriteStream ( named.replace(/\s/g,''));
@@ -237,6 +261,66 @@ router.post('/genword', function(req, res){
     res.redirect('back');
   });
 });
+
+
+
+
+
+router.post('/genword', function(req, res){
+  Student.findOne({username: req.user.username}).populate('cv').exec(function(err, theStudent){
+    var docx = officegen('docx');
+
+    var pObjHead = docx.createP();
+    pObjHead.addText(theStudent.fullname.toString(), {bold: true, font_size: 20, font_face: 'Arial'});
+    pObjHead.addLineBreak();
+    pObjHead.addText(theStudent.address.toString(), {font_size: 12, font_face: 'Arial'});
+    pObjHead.addLineBreak();
+    pObjHead.addText('Mobile# ' + theStudent.mobilenumber.toString(), {font_size: 12, font_face: 'Arial'});
+    pObjHead.addLineBreak();
+    pObjHead.addText('Email: ' + theStudent.email.toString(), {font_size: 12, font_face: 'Arial'});
+
+
+
+    
+
+
+
+
+    var pObjSkills = docx.createP();
+    pObjSkills.addText('Skills', {font_size: 16, font_face: 'Arial', underline: true});
+    pObjSkills.addLineBreak();
+    theStudent.cv.forEach(function(studentCV){
+      studentCV.skills.forEach(function(studentSkills){
+        pObjSkills.addText(studentSkills);
+        pObjSkills.addLineBreak();
+      });
+    });
+
+    var named = './CV/' + theStudent.fullname + '.' + theStudent.username + '/' + 'CV.docx'
+    var out = fs.createWriteStream ( named.replace(/\s/g,''));
+
+    out.on ( 'error', function ( err ) {
+      console.log ( err );
+    });
+
+    async.parallel ([
+      function ( done ) {
+        out.on ( 'close', function () {
+          console.log ( 'Created a CV for ' + theStudent.fullname );
+          done ( null );
+        });
+        docx.generate ( out );
+      }
+
+    ], function ( err ) {
+      if ( err ) {
+        console.log ( 'error: ' + err );
+      } 
+    });
+    res.redirect('back');
+  });
+});
+
 
 
 

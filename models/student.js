@@ -6,9 +6,17 @@ var StudentSchema = new mongoose.Schema({
   folder: String,
 	fullname: String,
 	email: String,
+  address: String,
+  mobilenumber: Number,
 	username: String,
 	password: String,
 	authkey: String,
+  cv: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'cv'
+    }
+  ],
 	resetPasswordToken: String,
 	resetPasswordExpires: Date
 });

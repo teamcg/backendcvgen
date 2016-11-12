@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var CV = require('../models/cv');
+var Student = require('../models/student');
 
 
 router.get('/', function(req, res){
@@ -10,19 +11,19 @@ router.get('/', function(req, res){
 });
 
 router.post('/test', function(req, res){
-  var newCV = {
-    fullname: 'John Frades',
-    address: '43 shanaway rise',
-    mobilenumber: 0221600143,
-    email: 'johnfrades@gmail.com',
-    skills: ['guitar', 'web developer']
-  }
-
-  CV.create(req.body.cv, function(err, createdCV){
+  Student.findById(req.user.id, function(err, foundStudent){
     if(err){
-      console.log(err);
+        console.log(err);
     } else {
-      res.send(createdCV);
+        CV.create(req.body.cv, function(err, createdCV){
+        if(err){
+          console.log(err);
+        } else {
+          foundStudent.cv.push(createdCV);
+          foundStudent.save();
+          res.send('Successfully created CV!');
+        }
+      });
     }
   });
 });

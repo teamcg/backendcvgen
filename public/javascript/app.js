@@ -20,6 +20,13 @@ function checkPass(){
 
 function addmore() {
     var newspan = document.createElement('span');
-    newspan.innerHTML = '<input type="text" name="cv[skills]" placeholder="skills">';
-    document.getElementById('wrapper').appendChild(newspan);
+    newspan.innerHTML = '<input type="text" class="form-control skillsInput" name="cv[skills]" placeholder="Skills">';
+    document.getElementById('skillsField').appendChild(newspan);
+}
+
+function removeone(){
+  var theParent = document.querySelector('#skillsField');
+  var theChild = document.querySelectorAll('.skillsInput');
+
+  theParent.parentNode.removeChild(this)
 }

@@ -1,4 +1,4 @@
-.loginForm, .regForm, .authForm {
+  .loginForm, .regForm, .authForm {
 	
 	border: 2px solid black;
 	margin: 2em 0;
@@ -48,4 +48,13 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.skillsInput {
+  margin: 1em 0;
+}
+
+#studentPortal {
+
+  padding: 1em 5em;
 }
