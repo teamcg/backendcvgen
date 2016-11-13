@@ -1,4 +1,5 @@
-function checkPass(){ 
+
+  function checkPass(){ 
   var pass1 = document.getElementById('pass1');
   var pass2 = document.getElementById('pass2');
   var message = document.getElementById('confirmMessage');
@@ -19,14 +20,37 @@ function checkPass(){
 
 
 function addmore() {
-    var newspan = document.createElement('span');
-    newspan.innerHTML = '<input type="text" class="form-control skillsInput" name="cv[skills]" placeholder="Skills">';
-    document.getElementById('skillsField').appendChild(newspan);
+    var newdiv = document.createElement('div');
+    newdiv.className = 'form-group form-inline';
+    newdiv.innerHTML = 
+    '<input type="text" class="form-control skillsInput" name="cv[skills]" placeholder="Skills"><button type="button" class="btn btn-danger btnremove">-</button>';
+    document.getElementById('skillsField').appendChild(newdiv);
+    removeThis();
 }
 
-function removeone(){
-  var theParent = document.querySelector('#skillsField');
-  var theChild = document.querySelectorAll('.skillsInput');
 
-  theParent.parentNode.removeChild(this)
+
+
+var removeThis = function(){
+  $('.btnremove').on('click', function(){
+    $(this).parent('div').remove();
+  }); 
 }
+
+
+$(function(){
+
+
+ $('.btnremove').on('click', function(){
+    $(this).parent('div').remove();
+  }); 
+
+
+})
+ 
+
+
+
+
+
+

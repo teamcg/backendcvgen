@@ -45,6 +45,13 @@ Nov 12 <br>
 -- Reworked 'StudentSchema', where i added mobilenumber, address and email <br>
 -- Generated word document with: Fullname, address, mobile number, email and skills <br>
 
+Nov 13 <br>
+-- Added functionality in skills (removing and adding) <br>
+-- updates the CV <br>
+-- Added 'cvname' function, where if you put different name then it creates a new one. <br>
+-- added jQuery
+
+
 Cheers! <br>
 
 -John Lois Frades <br>

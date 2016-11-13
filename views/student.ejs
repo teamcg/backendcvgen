@@ -242,14 +242,7 @@
 
 <a href="/logout">Logout</a>
 
-<% files.forEach(function(CV){ %>
-<a href="./CV/<%= currentUser.folder %>/<%= CV %>">
-	<h1>
-	<%= CV %>	
-	</h1>	
-</a>
 
-<% }) %>
 
 
 
@@ -261,10 +254,10 @@
 <form action="/profile" method="POST">
 	<h1>Sample Info</h1>
 	<div id='wrapper'>
-	 <div class="form-group">
+<!-- 	 <div class="form-group">
 	    <label>Fullname</label>
 	    <input type="text" class="form-control" name='studentprofile[fullname]' placeholder="Fullname" value="<%= theStudent.fullname %>">
-	  </div>
+	  </div> -->
 	  <div class="form-group">
 	    <label>Address</label>
 	    <input type="text" class="form-control" name="studentprofile[address]" placeholder="Address" value="<%= theStudent.address %>">
@@ -281,28 +274,65 @@
 </form>
 
 <h1>Create CV</h1>
-
-	<form action="/test" method="POST">
+	<form action="/test2" method="POST">
+	<% if(theStudent.cv.length === 0){ %>
+		<label>CV Name</label>
+		<input type="text" name="cv[cvname]" class="form-control" required>
+	<% } else { %>
+		<% theStudent.cv.forEach(function(studentCV){ %>
+			<label>CV Name</label>
+		<input type="text" name="cv[cvname]" class="form-control" value="<%= studentCV.cvname %>" required>
+		<% });%>
+	<% } %>
 	  <h1>
 	  	Skills 
 	  	<button type="button" class="btn btn-primary" onclick='addmore()'>+</button>
-	  	<button type="button" class="btn btn-danger" onclick='removeone()'>-</button>
 	  </h1>
-
-
 <div class="form-group" id="skillsField"> 
-<% theStudent.cv.forEach(function(studentCV){ %>
-	<% studentCV.skills.forEach(function(studentSkills){ %>
-	<input type="text" class="form-control skillsInput" name="cv[skills]" placeholder="Skills" value="<%= studentSkills %>">
-	<% }) %>
-<% }) %>
-	  </div>
-	</div>
+	<% if(theStudent.cv.length === 0) { %>
+	<div class="form-group form-inline">
+		<input type="text" class="form-control skillsInput" name="cv[skills]" placeholder="Skills">
 
+	</div>
+	<% } else { %>
+		<% theStudent.cv.forEach(function(studentCV){ %>
+			<% studentCV.skills.forEach(function(studentSkills){ %>
+				<div class="form-group form-inline">
+					<input type="text" class="form-control skillsInput" name="cv[skills]" value="<%= studentSkills %>" placeholder="Skills">
+					<button type="button" class="btn btn-danger btnremove">-</button>
+				</div>
+
+		<% }); %>
+	  <% }); %>
+	<% } %>
+</div>
+	</div>
 	<button class="btn btn-success">Save CV</button>
 	</form>
-	</div>
+
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">The CV's</div>
+
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+	<% files.forEach(function(CV){ %>
+		<tr>
+			<td>
+			<%= CV %>	
+			</td>
+
+			<td>
+				<a href="./CV/<%= currentUser.folder %>/<%= CV %>">Download</a>
+			</td>
+		</tr>
+	<% }); %>
+    </thead>
+  </table>
 </div>
 
-<%= theStudent.cv %>
+
 <% include partials/footer %>

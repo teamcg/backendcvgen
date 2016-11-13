@@ -217,50 +217,50 @@ router.post('/reset/:token', function(req, res) {
 
 
 
-router.post('/', function(req, res){
-  Student.findOne({username: req.user.username}, function(err, theStudent){
-    var docx = officegen('docx');
+// router.post('/', function(req, res){
+//   Student.findOne({username: req.user.username}, function(err, theStudent){
+//     var docx = officegen('docx');
 
-    var pObjHead = docx.createP();
-    pObjHead.addText(theStudent.fullname.toString(), {bold: true, font_size: 20, font_face: 'Arial'});
-    pObjHead.addLineBreak();
-    pObjHead.addText(theStudent.address.toString(), {font_size: 12, font_face: 'Arial'});
-    pObjHead.addLineBreak();
-    pObjHead.addText('Mobile# ' + theStudent.mobilenumber.toString(), {font_size: 12, font_face: 'Arial'});
-    pObjHead.addLineBreak();
-    pObjHead.addText('Email: ' + theStudent.email.toString(), {font_size: 12, font_face: 'Arial'});
+//     var pObjHead = docx.createP();
+//     pObjHead.addText(theStudent.fullname.toString(), {bold: true, font_size: 20, font_face: 'Arial'});
+//     pObjHead.addLineBreak();
+//     pObjHead.addText(theStudent.address.toString(), {font_size: 12, font_face: 'Arial'});
+//     pObjHead.addLineBreak();
+//     pObjHead.addText('Mobile# ' + theStudent.mobilenumber.toString(), {font_size: 12, font_face: 'Arial'});
+//     pObjHead.addLineBreak();
+//     pObjHead.addText('Email: ' + theStudent.email.toString(), {font_size: 12, font_face: 'Arial'});
 
-    var pObjSkills = docx.createP();
-    pObjSkills.addText('Skills', {font_size: 16, font_face: 'Arial', underline: true});
-    pObjSkills.addLineBreak();
-    theStudent.cv.forEach(function(studentCV){
-      console.log(studentCV);
-    });
+//     var pObjSkills = docx.createP();
+//     pObjSkills.addText('Skills', {font_size: 16, font_face: 'Arial', underline: true});
+//     pObjSkills.addLineBreak();
+//     theStudent.cv.forEach(function(studentCV){
+//       console.log(studentCV);
+//     });
 
-    var named = './CV/' + theStudent.fullname + '.' + theStudent.username + '/' + 'CV.docx'
-    var out = fs.createWriteStream ( named.replace(/\s/g,''));
+//     var named = './CV/' + theStudent.fullname + '.' + theStudent.username + '/' + 'CV.docx'
+//     var out = fs.createWriteStream ( named.replace(/\s/g,''));
 
-    out.on ( 'error', function ( err ) {
-      console.log ( err );
-    });
+//     out.on ( 'error', function ( err ) {
+//       console.log ( err );
+//     });
 
-    async.parallel ([
-      function ( done ) {
-        out.on ( 'close', function () {
-          console.log ( 'Created a CV for ' + theStudent.fullname );
-          done ( null );
-        });
-        docx.generate ( out );
-      }
+//     async.parallel ([
+//       function ( done ) {
+//         out.on ( 'close', function () {
+//           console.log ( 'Created a CV for ' + theStudent.fullname );
+//           done ( null );
+//         });
+//         docx.generate ( out );
+//       }
 
-    ], function ( err ) {
-      if ( err ) {
-        console.log ( 'error: ' + err );
-      } 
-    });
-    res.redirect('back');
-  });
-});
+//     ], function ( err ) {
+//       if ( err ) {
+//         console.log ( 'error: ' + err );
+//       } 
+//     });
+//     res.redirect('back');
+//   });
+// });
 
 
 
@@ -268,8 +268,11 @@ router.post('/', function(req, res){
 
 router.post('/genword', function(req, res){
   Student.findOne({username: req.user.username}).populate('cv').exec(function(err, theStudent){
+
     var docx = officegen('docx');
 
+
+    //Personal Info
     var pObjHead = docx.createP();
     pObjHead.addText(theStudent.fullname.toString(), {bold: true, font_size: 20, font_face: 'Arial'});
     pObjHead.addLineBreak();
@@ -280,18 +283,14 @@ router.post('/genword', function(req, res){
     pObjHead.addText('Email: ' + theStudent.email.toString(), {font_size: 12, font_face: 'Arial'});
 
 
-
-    
-
-
-
-
+    //Skills 
     var pObjSkills = docx.createP();
+    var bulletPoint = String.fromCharCode(8226);
     pObjSkills.addText('Skills', {font_size: 16, font_face: 'Arial', underline: true});
     pObjSkills.addLineBreak();
     theStudent.cv.forEach(function(studentCV){
       studentCV.skills.forEach(function(studentSkills){
-        pObjSkills.addText(studentSkills);
+        pObjSkills.addText(bulletPoint + ' ' + studentSkills);
         pObjSkills.addLineBreak();
       });
     });

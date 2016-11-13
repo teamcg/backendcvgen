@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var CVSchema = new mongoose.Schema({
+	cvname: String,
 	fullname: String,
 	address: String,
 	mobilenumber: Number,

@@ -67,11 +67,9 @@ passport.use(Student.createStrategy());
 
 passport.use(new LocalStrategy(function(username, password, done) {
   Student.findOne({ username: username }, function(err, user) {
-    console.log(username);
     if (err) return done(err);
     if (!user) return done(null, false, { message: 'Incorrect username.' });
     user.comparePassword(password, function(err, isMatch) {
-      console.log(password);
       if (isMatch) {
         return done(null, user);
       } else {
