@@ -19,6 +19,8 @@ var officegen = require('officegen');
 
 var app = express();
 
+app.use(methodOverride("_method"));
+
 
 //Import the models
 var Student = require('./models/student');
@@ -97,18 +99,8 @@ app.use(indexRoute);
 
 
 
-//ROUTES
 
-
-
-
-
-
-
-
-
-
-// //To heroku
+//To heroku
 // app.listen(process.env.PORT, function(req, res){
 // 	console.log('server started at PORT 3000');
 // });

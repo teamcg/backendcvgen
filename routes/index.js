@@ -6,6 +6,8 @@ var Student = require('../models/student');
 var officegen = require('officegen');
 var fs = require('fs');
 var async = require('async');
+var TheCV = require('../models/thecv');
+var methodOverride = require('method-override');
 
 
 router.get('/', function(req, res){
@@ -25,6 +27,58 @@ router.post('/test2', function(req, res){
           } else {
           theStudent.cv.push(createdCV);
           theStudent.save();
+
+          //
+              var docx = officegen('docx');
+
+              //Personal Info
+              var pObjHead = docx.createP();
+              pObjHead.addText(theStudent.fullname.toString(), {bold: true, font_size: 20, font_face: 'Arial'});
+              pObjHead.addLineBreak();
+              pObjHead.addText(theStudent.address.toString(), {font_size: 12, font_face: 'Arial'});
+              pObjHead.addLineBreak();
+              pObjHead.addText('Mobile# ' + theStudent.mobilenumber.toString(), {font_size: 12, font_face: 'Arial'});
+              pObjHead.addLineBreak();
+              pObjHead.addText('Email: ' + theStudent.email.toString(), {font_size: 12, font_face: 'Arial'});
+
+
+              //Skills 
+              var pObjSkills = docx.createP();
+              var bulletPoint = String.fromCharCode(8226);
+              pObjSkills.addText('Skills', {font_size: 16, font_face: 'Arial', underline: true});
+              pObjSkills.addLineBreak();
+              theStudent.cv.forEach(function(studentCV){
+                studentCV.skills.forEach(function(studentSkills){
+                  pObjSkills.addText(bulletPoint + ' ' + studentSkills);
+                  pObjSkills.addLineBreak();
+                });
+              });
+
+              var named = './CV/' + theStudent.fullname + '.' + theStudent.username + '/' + cvName
+              var out = fs.createWriteStream ( named.replace(/\s/g,''));
+
+              out.on ( 'error', function ( err ) {
+                console.log ( err );
+              });
+
+              async.parallel ([
+                function ( done ) {
+                  out.on ( 'close', function () {
+                    console.log ( 'Created a CV for ' + theStudent.fullname );
+                    done ( null );
+                  });
+                  docx.generate ( out );
+                }
+
+              ], function ( err ) {
+                if ( err ) {
+                  console.log ( 'error: ' + err );
+                } 
+              });
+          //
+
+
+
           res.redirect('back');
           }
         })
@@ -34,7 +88,6 @@ router.post('/test2', function(req, res){
             console.log(err);
           } else {
           Student.findById(req.user.id).populate('cv').exec(function(err, theStudentUpdate){
-            console.log(theStudentUpdate);
             if(err){
               console.log(err);
             } else {
@@ -46,9 +99,9 @@ router.post('/test2', function(req, res){
               pObjHead.addLineBreak();
               pObjHead.addText(theStudentUpdate.address.toString(), {font_size: 12, font_face: 'Arial'});
               pObjHead.addLineBreak();
-              pObjHead.addText('Mobile# ' + theStudent.mobilenumber.toString(), {font_size: 12, font_face: 'Arial'});
+              pObjHead.addText('Mobile# ' + theStudentUpdate.mobilenumber.toString(), {font_size: 12, font_face: 'Arial'});
               pObjHead.addLineBreak();
-              pObjHead.addText('Email: ' + theStudent.email.toString(), {font_size: 12, font_face: 'Arial'});
+              pObjHead.addText('Email: ' + theStudentUpdate.email.toString(), {font_size: 12, font_face: 'Arial'});
 
 
               //Skills 
@@ -108,7 +161,7 @@ router.post('/login', function(req, res, next) {
     }
     req.logIn(user, function(err) {
       if (err) return next(err);
-      return res.redirect('/student');
+      return res.redirect('/student2');
     });
   })(req, res, next);
 });
@@ -122,6 +175,222 @@ router.get("/logout", function(req, res){
 router.get('/forgotpass', function(req, res){
 	res.render('forgotpass');
 });
+
+
+
+//TEST
+router.get('/testing', function(req, res){
+  res.render('test');
+});
+
+router.post('/testing', function(req, res){
+  TheCV.create(req.body.thecv, function(err, newCV){
+    if(err){
+      console.log(err);
+    } else {
+      console.log('Successfully created CV');
+      res.redirect('/');
+    }
+  });
+});
+
+router.post('/createcvtest', function(req, res){
+  var cvName = req.body.thecv.cvname + '.docx';
+  TheCV.create(req.body.thecv, function(err, newCV){
+    if(err){
+      console.log(err);
+    } else {
+      Student.findById(req.user.id, function(err, theStudent){
+        if(err){
+          console.log(err);
+        } else {
+          theStudent.cv.push(newCV);
+          theStudent.save();
+          //~~~~~~~~~~~~~~~~~~
+
+
+              var docx = officegen('docx');
+
+              //Personal Info
+              var pObjHead = docx.createP();
+              pObjHead.addText(newCV.firstname.toString() + ' ' + newCV.lastname.toString(), {bold: true, font_size: 20, font_face: 'Arial'});
+              pObjHead.addLineBreak();
+              pObjHead.addText(newCV.address.toString(), {font_size: 12, font_face: 'Arial'});
+              pObjHead.addLineBreak();
+
+
+
+              //Skills 
+              // var pObjSkills = docx.createP();
+              // var bulletPoint = String.fromCharCode(8226);
+              // pObjSkills.addText('Skills', {font_size: 16, font_face: 'Arial', underline: true});
+              // pObjSkills.addLineBreak();
+              // theStudent.cv.forEach(function(studentCV){
+              //   studentCV.skills.forEach(function(studentSkills){
+              //     pObjSkills.addText(bulletPoint + ' ' + studentSkills);
+              //     pObjSkills.addLineBreak();
+              //   });
+              // });
+
+              var named = './CV/' + theStudent.fullname + '.' + theStudent.username + '/' + cvName
+              var out = fs.createWriteStream ( named.replace(/\s/g,''));
+
+              out.on ( 'error', function ( err ) {
+                console.log ( err );
+              });
+
+              async.parallel ([
+                function ( done ) {
+                  out.on ( 'close', function () {
+                    console.log ( 'Created a CV for ' + newCV.firstname + newCV.lastname);
+                    done ( null );
+                  });
+                  docx.generate ( out );
+                }
+
+              ], function ( err ) {
+                if ( err ) {
+                  console.log ( 'error: ' + err );
+                } 
+              });
+          //
+
+
+
+          //~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+          res.redirect('/student2');
+        }
+      });
+    }
+  });
+});
+
+router.post('/createcvtest2', function(req, res){
+  Student.findById(req.user.id, function(err, theStudent){
+    if(err){
+      console.log(err);
+    } else {
+      TheCV.create(req.body.thecv, function(err, newCV){
+        if(err){
+          console.log(err);
+        } else {
+          theStudent.cv.push(newCV);
+          theStudent.save();
+          res.redirect('back');
+        }
+      });
+    }
+  });
+});
+
+router.get('/student2', function(req, res){
+  Student.findById(req.user.id).populate('cv').exec(function(err, loginStudent){
+    if(err){
+      console.log(err);
+    } else {
+      fs.readdir('./CV/' + req.user.folder, function(err, foundFolder){
+        if(err){
+          console.log(err);
+        } else {
+          console.log(foundFolder);
+          res.render('studenttest', {loginStudent: loginStudent, foundFolder: foundFolder});
+        }
+      })
+    }
+  });
+});
+
+router.get('/cvs/:cvid', function(req, res){
+  TheCV.findById(req.params.cvid, function(err, foundCV){
+    if(err){
+      console.log(err);
+    } else {
+      console.log(foundCV);
+      res.render('cvedit', {foundCV: foundCV});
+      // res.send('hey');
+    }
+  });
+});
+
+router.put('/cvs/:cvid', function(req,res){
+  var cvName = req.body.editcv.cvname + '.docx';
+  TheCV.findByIdAndUpdate(req.params.cvid, req.body.editcv, function(err, editCV){
+
+    if(err){
+      console.log(err);
+    } else {
+      console.log('-----------------');
+      console.log(editCV);
+      console.log('-----------------');
+      var docx = officegen('docx');
+
+              //Personal Info
+              var pObjHead = docx.createP();
+              pObjHead.addText(editCV.firstname.toString() + ' ' + editCV.lastname.toString(), {bold: true, font_size: 20, font_face: 'Arial'});
+              pObjHead.addLineBreak();
+              pObjHead.addText(editCV.address.toString(), {font_size: 12, font_face: 'Arial'});
+              pObjHead.addLineBreak();
+
+
+
+              //Skills 
+              // var pObjSkills = docx.createP();
+              // var bulletPoint = String.fromCharCode(8226);
+              // pObjSkills.addText('Skills', {font_size: 16, font_face: 'Arial', underline: true});
+              // pObjSkills.addLineBreak();
+              // theStudent.cv.forEach(function(studentCV){
+              //   studentCV.skills.forEach(function(studentSkills){
+              //     pObjSkills.addText(bulletPoint + ' ' + studentSkills);
+              //     pObjSkills.addLineBreak();
+              //   });
+              // });
+
+              var named = './CV/' + req.user.fullname + '.' + req.user.username + '/' + cvName
+              var out = fs.createWriteStream ( named.replace(/\s/g,''));
+
+              out.on ( 'error', function ( err ) {
+                console.log ( err );
+              });
+
+              async.parallel ([
+                function ( done ) {
+                  out.on ( 'close', function () {
+                    console.log ( 'Created a CV for ' + editCV.firstname + editCV.lastname);
+                    done ( null );
+                  });
+                  docx.generate ( out );
+                }
+
+              ], function ( err ) {
+                if ( err ) {
+                  console.log ( 'error: ' + err );
+                } 
+              });
+          //
+
+
+
+          //~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+          res.redirect('/student2');
+    }
+  })
+})
+
+
 
 
 module.exports = router;

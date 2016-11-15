@@ -1,0 +1,19 @@
+<% include partials/header %>
+
+
+CV EDIT
+
+
+
+<form action="/cvs/<%= foundCV._id%>?_method=PUT" method="POST">
+	
+<input type="text" name="editcv[firstname]" value="<%= foundCV.firstname %>">
+<input type="text" name="editcv[cvname]" value="<%= foundCV.cvname %>">
+<button>Submit</button>
+
+</form>
+
+<h1><%= foundCV %></h1>
+
+
+<% include partials/footer %>

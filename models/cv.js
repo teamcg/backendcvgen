@@ -1,3 +1,4 @@
+
 var mongoose = require('mongoose');
 
 var CVSchema = new mongoose.Schema({
@@ -8,5 +9,9 @@ var CVSchema = new mongoose.Schema({
 	email: String,
 	skills: [String]
 });
+
+
+
+
 
 module.exports = mongoose.model('cv', CVSchema);

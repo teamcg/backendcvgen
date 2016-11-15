@@ -14,7 +14,7 @@ var StudentSchema = new mongoose.Schema({
   cv: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'cv'
+      ref: 'thecv'
     }
   ],
 	resetPasswordToken: String,

@@ -139,10 +139,10 @@ router.post('/forgot', function(req, res, next) {
     },
     function(token, user, done) {
       var transporter = nodemailer.createTransport('SMTP', {
-        service: '',
+        service: 'SendGrid',
         auth: {
-          user: '',
-          pass: ''
+          user: 'dankusername',
+          pass: '81hf081082ht0'
         }
       });
       var mailOptions = {
@@ -190,10 +190,10 @@ router.post('/reset/:token', function(req, res) {
     },
     function(user, done) {
       var smtpTransport = nodemailer.createTransport('SMTP', {
-        service: '',
+         service: 'SendGrid',
         auth: {
-          user: '',
-          pass: ''
+          user: 'dankusername',
+          pass: '81hf081082ht0'
         }
       });
       var mailOptions = {

@@ -1,0 +1,32 @@
+<% include partials/header %>
+
+<div class='container text-center'>
+	<h2>Welcome student <%= loginStudent %></h2> 
+</div>
+
+
+<% loginStudent.cv.forEach(function(theCV){ %>
+
+	<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<a href="/cvs/<%= theCV._id%>">
+				<h2><%= theCV.cvname.replace(/\s/g,'') %></h2>
+			</a>
+			<a href="./CV/<%= loginStudent.folder %>/<%= theCV.cvname.replace(/\s/g,'')%>.docx">
+				<h3>Download</h3>
+			</a>
+		</div>
+	</div>
+</div>
+<% }); %>
+
+
+
+<a href="/testing">
+	<button>Create CV</button>
+</a>
+
+
+
+<% include partials/footer %>
