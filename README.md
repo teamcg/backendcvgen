@@ -51,6 +51,11 @@ Nov 13 <br>
 -- Added 'cvname' function, where if you put different name then it creates a new one. <br>
 -- added jQuery
 
+Nov 15 <br>
+-- Rework Student portal page, it shows the list of CV's <br>
+-- CV's are clickable and sent to another page to edit <br>
+-- CV's have download buttons <br>
+
 
 Cheers! <br>
 
