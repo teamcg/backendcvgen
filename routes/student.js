@@ -3,6 +3,10 @@ var router = express.Router();
 var Student = require('../models/student');
 var AuthKey = require('../models/authkey');
 var CV = require('../models/cv');
+var TheCV = require('../models/thecv');
+var Experience = require('../models/experience');
+var Education = require('../models/education');
+var Skills = require('../models/skills');
 var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
@@ -349,6 +353,102 @@ router.get('/CV/:file(*)', function(req, res, next){ // this routes all types of
   var path = path.resolve(".")+'/CV/' + file;
   res.download(path); // magic of download function
 
+});
+
+
+
+
+//Testing purpose ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+router.get('/fortest', function(req, res){
+  res.render('fortest');
+});
+
+router.post('/newcv', function(req, res){
+  var thecvname = {
+    cvname: req.body.thecvname,
+  };
+  TheCV.create(thecvname, function(err, newCV){
+    if(err){
+      console.log(err);
+    } else {
+      Student.findById(req.user.id, function(err, theStudent){
+        if(err){
+          console.log(err);
+        } else {
+          var cvid = newCV.id;
+          theStudent.cv.push(newCV);
+          theStudent.save();
+          res.redirect('/cvs/' + cvid);
+        }
+      });
+    }
+  });
+});
+
+router.post('/fortesting', function(req, res){
+  TheCV.create(req.body.thecv, function(err, newCV){
+    if(err){
+      console.log(err);
+    } else {
+
+      res.send(newCV);
+    }
+  });
+});
+
+
+router.post('/pisubmit/:cvid', function(req, res){
+  TheCV.findByIdAndUpdate(req.params.cvid, req.body.pi, function(err, updateCV){
+    if(err){
+      console.log(err);
+    } else {
+      res.redirect('/cvs/' + req.params.cvid);
+    }
+  });
+});
+
+
+router.post('/pssubmit/:cvid', function(req, res){
+  TheCV.findByIdAndUpdate(req.params.cvid, req.body.ps, function(err, updateCV){
+    if(err){
+      console.log(err);
+    } else {
+      res.redirect('/cvs/' + req.params.cvid);
+    }
+  });
+});
+
+router.post('/expsubmit/:cvid', function(req, res){
+  var expData = {
+    category: req.body.expcategory,
+    role: req.body.exprole,
+    companydescription: req.body.expcompanydescription,
+    company: req.body.expcompany,
+    city: req.body.expcity,
+    country: req.body.expcountry,
+    startmonth: req.body.expstartmonth,
+    startyear: req.body.expstartyear,
+    endmonth: req.body.expendmonth,
+    endyear: req.body.expendyear
+
+  }
+
+
+  Experience.create(expData, function(err, newExperience){
+    if(err){
+      console.log(err);
+    } else {
+      TheCV.findById(req.params.cvid, function(err, updateCV){
+        if(err){
+          console.log(err);
+        } else {
+          updateCV.experience.push(newExperience);
+          updateCV.save();
+          res.redirect('/cvs/' + req.params.cvid);
+        }
+      });
+    }
+  });
 });
 
 

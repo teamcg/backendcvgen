@@ -56,6 +56,10 @@ Nov 15 <br>
 -- CV's are clickable and sent to another page to edit <br>
 -- CV's have download buttons <br>
 
+Nov 16 <br>
+-- Major Fix on UI on student portal <br>
+-- Added Experience, Skills and education schema model <br>
+-- Currently working: Creating CV with cvname, updating the personal info, the personal statement and experience -array format- <br>
 
 Cheers! <br>
 

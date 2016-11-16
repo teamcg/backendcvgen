@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Personal Info</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/w3.css" rel="stylesheet" >
+		<style>
+			.screen {display:none;}
+		</style>
+	</head>
+	<body>
+		<div class="w3-container">
+			<div class="col-sm-8 col-sm-offset-2">
+				<ul class="w3-navbar w3-black">
+					<li><a href="javascript:void(0)" class="tablink" onclick="openScreen(event, 'SCProfile');">My profile</a></li>
+					<li><a href="javascript:void(0)" class="tablink" onclick="openScreen(event, 'SCEditCV');">Create CV</a></li>
+					<li><a href="javascript:void(0)" class="tablink" onclick="openScreen(event, 'SCShowAll');">My CVs</a></li>
+				</ul>
+				
+				<div id="SCEditCV" class="w3-container screen">
+					<!-- surrinder's code -->
+					<form>
+					<div class=""> 
+						<div class="w3-accordion w3-light-grey">
+						<h2>My Web-Dev CV</h2>
+			
+						  <button onclick="myFunction('personalinfo')" class="w3-btn-block w3-left-align">Personal Info</button>
+						 
+						  <div id="personalinfo" class="w3-accordion-content w3-container">
+						  
+						   <br />
+							<div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="first name">First Name:</label>
+								</div>
+								<div class="col-sm-5">	
+									<input type="text" class="form-control" name="thecv[first-name]" placeholder="First Name" required>			
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="last name">Last Name:</label>
+								</div>
+								<div class="col-sm-5">	
+									<input type="text" class="form-control" name="thecv[last-name]" placeholder="Last Name" required>				
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="address">Address:</label>
+								</div>
+								<div class="col-sm-5">	 
+									<input type="text" class="form-control" name="thecv[address]" placeholder="Address" required>						
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="suburb">Suburb:</label>
+								</div>
+								<div class="col-sm-5">	
+									<input type="text" class="form-control" name="thecv[suburb]" placeholder="Suburb" required>				
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3 control-label">
+									<label for="city">City:</label>
+								</div>
+								<div class="col-sm-5">	
+									<input type="text" class="form-control" name="thecv[city]" placeholder="City" required>				
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="postcode">Post Code:</label>
+								</div>
+								<div class="col-sm-3">	
+									<input type="text" name="thecv[postcode]" class="form-control" placeholder="Post Code" required>				
+								</div>
+								<div class="col-sm-2">	
+									<label name="thecv[postcodefinder]"><u><a href="demo.html">Find your post code</a></u></label>				
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="phone">Mobile Phone:</label>
+								</div>
+								<div class="col-sm-5">	
+									<input type="text" class="form-control" name="thecv[phone]" placeholder="Mobile Phone" required>				
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="email">Email:</label>
+								</div>
+								<div class="col-sm-5">	
+									<input type="text" class="form-control" name="thecv[email]"  placeholder="abc@domain.com" required>				
+								</div>
+							</div>
+							 <br />
+						</div>
+					</div>
+		</div> 
+			 
+		 <div class="">	 
+						<div class="w3-accordion w3-light-grey">
+						  <button onclick="myFunction('personalstatement')" class="w3-btn-block w3-left-align">Personal Statement</button>
+						 
+						  <div id="personalstatement" class="w3-accordion-content w3-container">
+						   <br />
+							<div class="row">
+							   <div class="col-sm-6 col-sm-offset-2">
+										<br />
+										  <textarea name="thecv[personalstatement]"  required="required" class="form-control" rows="8" placeholder=""></textarea>
+								   <br />			
+								 </div>
+							</div>
+							 <br />
+							</div>
+						</div>
+		 </div> 
+					
+		<div class="">	
+						 <div class="w3-accordion w3-light-grey">
+						  <button onclick="myFunction('experience')" class="w3-btn-block w3-left-align">Experience</button>
+						  <div id="experience" class="w3-accordion-content w3-container">  
+						   <br />
+							<div class="row">
+								<div class="col-sm-3 control-label"> 
+									<label for="experience.category">Category:</label>
+								</div>
+								<div class="col-sm-5">	
+									<select class="form-control" name="thecv[experience.category]" required autofocus>
+									  <option>Category 1</option>
+									  <option>Category 2</option> 
+									</select>			
+								</div>
+							  </div>
+							  <div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="experience.role">Role:</label>
+								</div>
+								<div class="col-sm-5">	
+									<input type="text" class="form-control" name="thecv[experience.role]" placeholder="Role" required>				
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="experience.company">Company Description:</label>
+								</div>
+								<div class="col-sm-5">	 
+									<textarea name="thecv[experience.company]"  required="required" class="form-control" rows="4"></textarea>					
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="experience.company">Company:</label>
+								</div>
+								<div class="col-sm-5">	
+									<input type="text" name="thecv[experience.company]" class="form-control" placeholder="Company" required>				
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3 control-label">
+									<label for="experience.city">City:</label>
+								</div>
+								<div class="col-sm-5">	
+									<input type="text" class="form-control" name="thecv[experience.city]" placeholder="City" required>				
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="experience.country">Country:</label>
+								</div>
+								<div class="col-sm-5">	
+									<input type="text" name="thecv[experience.country]" class="form-control"  placeholder="Country" required>			
+								</div>
+							</div>
+							  <div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="experience.start">Start Date:</label>
+								</div>
+									<div class="col-sm-3">	
+										<select class="form-control" name="thecv[experience.starttmonth]" required>
+										<option>January</option>
+										<option>February</option>
+										<option>March</option>
+										<option>April</option>
+										<option>May</option>
+										<option>June</option>
+										<option>July</option>
+										<option>August</option>
+										<option>September</option>
+										<option>October</option>
+										<option>November</option>
+										<option>December</option>
+										</select>					
+									</div>
+									<div class="col-sm-2">	
+										<select class="form-control" name="thecv[experience.startyear]" required>
+										<option>2002</option>
+										<option>2003</option>
+										<option>2004</option>
+										<option>2005</option>
+										<option>2006</option>
+										<option>2007</option>
+										<option>2008</option>
+										<option>2009</option>
+										<option>2010</option>
+										<option>2011</option>
+										<option>2012</option>
+										<option>2013</option>
+										<option>2014</option>
+										<option>2015</option>
+										<option>2016</option>
+										<option>2017</option>
+										</select>					
+									</div>
+								</div> 
+							  <div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="experience.end">End Date:</label>
+								</div>
+									<div class="col-sm-3">	
+										<select class="form-control" name="experience.endmonth" required>
+										<option>January</option>
+										<option>February</option>
+										<option>March</option>
+										<option>April</option>
+										<option>May</option>
+										<option>June</option>
+										<option>July</option>
+										<option>August</option>
+										<option>September</option>
+										<option>October</option>
+										<option>November</option>
+										<option>December</option>
+										</select>					
+									</div>
+									<div class="col-sm-2">	
+										<select class="form-control" name="experience.endyear" required>
+										<option>2002</option>
+										<option>2003</option>
+										<option>2004</option>
+										<option>2005</option>
+										<option>2006</option>
+										<option>2007</option>
+										<option>2008</option>
+										<option>2009</option>
+										<option>2010</option>
+										<option>2011</option>
+										<option>2012</option>
+										<option>2013</option>
+										<option>2014</option>
+										<option>2015</option>
+										<option>2016</option>
+										<option>2017</option>
+										</select>					
+									</div>
+								</div> 
+							 <br />
+						</div>
+					</div>
+		</div> 
+			
+			
+			<div class="">
+						 <div class="w3-accordion w3-light-grey">
+						  <button onclick="myFunction('education')" class="w3-btn-block w3-left-align">Education</button>
+						 
+						  <div id="education" class="w3-accordion-content w3-container">  
+						   <br />
+							<div class="row">
+								<div class="col-sm-3 control-label"> 
+									<label for="education.category">Category:</label>
+								</div>
+								<div class="col-sm-5">	
+									<select class="form-control" name="thecv[education.category]" required autofocus>
+									  <option>Category 1</option>
+									  <option>Category 2</option> 
+									</select>			
+								</div>
+							  </div>
+							  <div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="education.school">School Name:</label>
+								</div>
+								<div class="col-sm-5">	
+									<input type="text" class="form-control" name="thecv[experience.school]" placeholder="School Name" required>				
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3 control-label">
+									<label for="education.city">City:</label>
+								</div>
+								<div class="col-sm-5">	
+									<input type="text" class="form-control" name="thecv[education.city]" placeholder="City" required>				
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="education.country">Country:</label>
+								</div>
+								<div class="col-sm-5">	
+									<input type="text" name="thecv[education.country]" class="form-control"  placeholder="Country" required>			
+								</div>
+							</div>
+							  <div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="education.start">Start Date:</label>
+								</div>
+									<div class="col-sm-3">	
+										<select class="form-control" name="thecv[education.starttmonth]" required>
+										<option>January</option>
+										<option>February</option>
+										<option>March</option>
+										<option>April</option>
+										<option>May</option>
+										<option>June</option>
+										<option>July</option>
+										<option>August</option>
+										<option>September</option>
+										<option>October</option>
+										<option>November</option>
+										<option>December</option>
+										</select>					
+									</div>
+									<div class="col-sm-2">	
+										<select class="form-control" name="thecv[education.startyear]" required>
+										<option>2002</option>
+										<option>2003</option>
+										<option>2004</option>
+										<option>2005</option>
+										<option>2006</option>
+										<option>2007</option>
+										<option>2008</option>
+										<option>2009</option>
+										<option>2010</option>
+										<option>2011</option>
+										<option>2012</option>
+										<option>2013</option>
+										<option>2014</option>
+										<option>2015</option>
+										<option>2016</option>
+										<option>2017</option>
+										</select>					
+									</div>
+								</div> 
+							  <div class="row">
+								<div class="col-sm-3 control-label">
+									<label for="education.end">End Date:</label>
+								</div>
+									<div class="col-sm-3">	
+										<select class="form-control" name="education.endmonth" required>
+										<option>January</option>
+										<option>February</option>
+										<option>March</option>
+										<option>April</option>
+										<option>May</option>
+										<option>June</option>
+										<option>July</option>
+										<option>August</option>
+										<option>September</option>
+										<option>October</option>
+										<option>November</option>
+										<option>December</option>
+										</select>					
+									</div>
+									<div class="col-sm-2">	
+										<select class="form-control" name="education.endyear" required>
+										<option>2002</option>
+										<option>2003</option>
+										<option>2004</option>
+										<option>2005</option>
+										<option>2006</option>
+										<option>2007</option>
+										<option>2008</option>
+										<option>2009</option>
+										<option>2010</option>
+										<option>2011</option>
+										<option>2012</option>
+										<option>2013</option>
+										<option>2014</option>
+										<option>2015</option>
+										<option>2016</option>
+										<option>2017</option>
+										</select>					
+									</div>
+								</div> 
+							 <br />
+						</div>
+					</div>
+			</div> 
+		</form>
+				</div>
+				
+				<div id="SCProfile" class="w3-container screen">
+					<h2>My profile</h2>
+					<p>Paris is the capital of Brasil.</p>
+				</div>
+
+				<div id="SCShowAll" class="w3-container screen">
+					<h2>My CVs</h2>
+					<table class="w3-table">
+						<tr>
+						  <th>CV Name</th>
+						  <th>Date created</th>
+						  <th>Date modified</th>
+						</tr>
+						<tr>
+						  <td><a href="javascript:void(0)">My Web-Dev CV</a></td>
+						  <td>31/04/2016 4:30pm</td>
+						  <td>08/11/2016 2:15pm</td>
+						</tr>
+						<tr>
+						  <td><a href="javascript:void(0)">My Sales CV</a></td>
+						  <td>20/05/2016 4:30pm</td>
+						  <td>16/10/2016 2:15pm</td>
+						</tr>
+						<tr>
+						  <td><a href="javascript:void(0)">My Mobile-Dev CV</a></td>
+						  <td>28/01/2016 4:30pm</td>
+						  <td>28/01/2016 2:15pm</td>
+						</tr>
+					  </table>
+				</div>
+			</div>
+			
+			
+			
+	
+	
+
+
+
+</div>
+
+<script>
+	function openScreen(evt, screenName) {
+		var i, x, tablinks;
+		x = document.getElementsByClassName("screen");
+		for (i = 0; i < x.length; i++) {
+			x[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("tablink");
+		for (i = 0; i < x.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" w3-orange", "");
+		}
+		document.getElementById(screenName).style.display = "block";
+		evt.currentTarget.className += " w3-orange";
+	}
+
+	function myFunction(id) {
+		var x = document.getElementById(id);
+		if (x.className.indexOf("w3-show") == -1) {
+			x.className += " w3-show";
+		} else { 
+			x.className = x.className.replace(" w3-show", "");
+		}
+	}
+	
+	openScreen(event, 'SCEditCV');
+</script>
+
+</body>
+</html>

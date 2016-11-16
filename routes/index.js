@@ -179,20 +179,7 @@ router.get('/forgotpass', function(req, res){
 
 
 //TEST
-router.get('/testing', function(req, res){
-  res.render('test');
-});
 
-router.post('/testing', function(req, res){
-  TheCV.create(req.body.thecv, function(err, newCV){
-    if(err){
-      console.log(err);
-    } else {
-      console.log('Successfully created CV');
-      res.redirect('/');
-    }
-  });
-});
 
 router.post('/createcvtest', function(req, res){
   var cvName = req.body.thecv.cvname + '.docx';
@@ -308,12 +295,12 @@ router.get('/student2', function(req, res){
 });
 
 router.get('/cvs/:cvid', function(req, res){
-  TheCV.findById(req.params.cvid, function(err, foundCV){
+  TheCV.findById(req.params.cvid).populate('experience').exec(function(err, foundCV){
     if(err){
       console.log(err);
     } else {
       console.log(foundCV);
-      res.render('cvedit', {foundCV: foundCV});
+      res.render('fortest', {foundCV: foundCV});
       // res.send('hey');
     }
   });

@@ -10,24 +10,24 @@ var theCVSchema = new mongoose.Schema({
 	postcode: Number,
 	mobilephone: Number,
 	email: String,
-	careerobjective: String,
-	experience: {
-		category: String,
-		role: String,
-		companydescription: String,
-		company: String,
-		city: String,
-		country: String,
-		start: String,
-		end: String
-	},
+	personalstatement: String,
+	experience: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Experience'
+		}
+	],
 	education: {
-		category: String,
-		degree: String,
-		schoolname: String,
-		city: String,
-		country: String,
-		years: Number,
+		id: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Education'
+		}
+	},
+	skills:{
+		id: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Skills'
+		}
 	}
 });
 

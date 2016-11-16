@@ -1,0 +1,428 @@
+<% include partials/header %>
+
+<div class="w3-container">
+
+<%= foundCV %>
+    <!-- Personal Info -->
+<form action="/pisubmit/<%= foundCV.id %>" method="POST">
+<div class="col-sm-8 col-sm-offset-2">
+                 <div class="w3-accordion w3-light-grey">
+                  <button type="button" onclick="myFunction('personalinfo')" class="w3-btn-block w3-left-align">Personal Info</button>
+
+                  <div id="personalinfo" class="w3-accordion-content w3-container">
+                  
+                   <br />
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="first name">First Name:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" class="form-control" name="pi[firstname]" placeholder="First Name" value="<%= foundCV.firstname %>">			
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="last name">Last Name:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" class="form-control" name="pi[lastname]" placeholder="Last Name" value="<%= foundCV.lastname %>">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="address">Address:</label>
+                        </div>
+                        <div class="col-sm-5">	 
+                            <input type="text" class="form-control" name="pi[address]" placeholder="Address" value="<%= foundCV.address %>">						
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="suburb">Suburb:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" class="form-control" name="pi[suburb]" placeholder="Suburb" value="<%= foundCV.suburb %>">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 control-label">
+                            <label for="city">City:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" class="form-control" name="pi[city]" placeholder="City" value="<%= foundCV.city %>">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="postcode">Post Code:</label>
+                        </div>
+                        <div class="col-sm-3">	
+                            <input type="text" name="pi[postcode]" class="form-control" placeholder="Post Code" value="<%= foundCV.postcode %>">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="phone">Mobile Phone:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="number" class="form-control" name="pi[mobilephone]" placeholder="Mobile Phone" value="<%= foundCV.mobilephone %>">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="email">Email:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" class="form-control" name="pi[email]"  placeholder="abc@domain.com" value="<%= foundCV.email %>">				
+                        </div>
+                    </div>
+                     <br />
+               </div>
+            </div>
+            <button class="btn btn-primary">Submit</button>
+</div>
+
+</form>
+     <!-- Personal Statement -->
+<form action='/pssubmit/<%= foundCV.id %>' method='POST'>
+<div class="col-sm-8 col-sm-offset-2">	 
+                 <div class="w3-accordion w3-light-grey">
+                  <button type="button" onclick="myFunction('personalstatement')" class="w3-btn-block w3-left-align">Personal Statement</button>
+
+                  <div id="personalstatement" class="w3-accordion-content w3-container">
+                   <br />
+                    <div class="row">
+                       <div class="col-sm-6 col-sm-offset-2">
+                                <br />
+                                  <input type="text" name="ps[personalstatement]" value="<%= foundCV.personalstatement%>">
+                           <br />			
+                         </div>
+                    </div>
+                     <br />
+                </div>
+                <button class="btn btn-success">Submit</button>
+                                      </div>
+ </div>
+
+ </form>
+ 
+            <!-- Experience -->
+<form action="/expsubmit/<%= foundCV.id %>" method="POST">
+ <div class="col-sm-8 col-sm-offset-2">	
+                 <div class="w3-accordion w3-light-grey">
+                  <button type="button" onclick="myFunction('experience')" class="w3-btn-block w3-left-align">Experience</button>
+     
+                  <div id="experience" class="w3-accordion-content w3-container">  
+                   <br />
+                    <div class="row">
+                        <div class="col-sm-3 control-label"> 
+                            <label for="experience.category">Category:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <select class="form-control" name="expcategory" autofocus>
+                              <option value="Category1">Category 1</option>
+                              <option value="Category2">Category 2</option> 
+                            </select>			
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="experience.role">Role:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" class="form-control" name="exprole" placeholder="Role">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="experience.company">Company Description:</label>
+                        </div>
+                        <div class="col-sm-5">	 
+                            <textarea name="expcompanydescription"  class="form-control" rows="4"></textarea>					
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="experience.company">Company:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" name="expcompany" class="form-control" placeholder="Company">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 control-label">
+                            <label for="experience.city">City:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" class="form-control" name="expcity" placeholder="City">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="experience.country">Country:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" name="expcountry" class="form-control"  placeholder="Country">			
+                        </div>
+                    </div>
+                      <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="experience.start">Start Date:</label>
+                        </div>
+                            <div class="col-sm-3">	
+                                <select class="form-control" name="expstartmonth" >
+                                <option>January</option>
+                                <option>February</option>
+                                <option>March</option>
+                                <option>April</option>
+                                <option>May</option>
+                                <option>June</option>
+                                <option>July</option>
+                                <option>August</option>
+                                <option>September</option>
+                                <option>October</option>
+                                <option>November</option>
+                                <option>December</option>
+                                </select>					
+                            </div>
+                            <div class="col-sm-2">	
+                                <select class="form-control" name="expstartyear" >
+                                <option>2002</option>
+                                <option>2003</option>
+                                <option>2004</option>
+                                <option>2005</option>
+                                <option>2006</option>
+                                <option>2007</option>
+                                <option>2008</option>
+                                <option>2009</option>
+                                <option>2010</option>
+                                <option>2011</option>
+                                <option>2012</option>
+                                <option>2013</option>
+                                <option>2014</option>
+                                <option>2015</option>
+                                <option>2016</option>
+                                <option>2017</option>
+                                </select>					
+                            </div>
+                        </div> 
+                      <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="experience.end">End Date:</label>
+                        </div>
+                            <div class="col-sm-3">	
+                                <select class="form-control" name="expendmonth">
+                                <option>January</option>
+                                <option>February</option>
+                                <option>March</option>
+                                <option>April</option>
+                                <option>May</option>
+                                <option>June</option>
+                                <option>July</option>
+                                <option>August</option>
+                                <option>September</option>
+                                <option>October</option>
+                                <option>November</option>
+                                <option>December</option>
+                                </select>					
+                            </div>
+                            <div class="col-sm-2">	
+                                <select class="form-control" name="expendyear">
+                                <option>2002</option>
+                                <option>2003</option>
+                                <option>2004</option>
+                                <option>2005</option>
+                                <option>2006</option>
+                                <option>2007</option>
+                                <option>2008</option>
+                                <option>2009</option>
+                                <option>2010</option>
+                                <option>2011</option>
+                                <option>2012</option>
+                                <option>2013</option>
+                                <option>2014</option>
+                                <option>2015</option>
+                                <option>2016</option>
+                                <option>2017</option>
+                                </select>					
+                            </div>
+                        </div> 
+                     <br />
+                                       </div>
+<% foundCV.experience.forEach(function(experience){ %>
+    <h1><%= experience %></h1>
+<% }); %>
+<button class="btn btn-primary">Submit</button>
+            </div>
+</div>
+</form>
+    <!-- Education -->
+    
+    <div class="col-sm-8 col-sm-offset-2">	
+                 <div class="w3-accordion w3-light-grey">
+                  <button type="onclick" onclick="myFunction('education')" class="w3-btn-block w3-left-align">Education</button>
+
+                  <div id="education" class="w3-accordion-content w3-container">  
+                   <br />
+                    <div class="row">
+                        <div class="col-sm-3 control-label"> 
+                            <label for="education.category">Category:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <select class="form-control" name="thecv[education.category]" autofocus>
+                              <option>Category 1</option>
+                              <option>Category 2</option> 
+                            </select>			
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="education.school">School Name:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" class="form-control" name="thecv[experience.school]" placeholder="School Name" >				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 control-label">
+                            <label for="education.city">City:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" class="form-control" name="thecv[education.city]" placeholder="City" >				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="education.country">Country:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" name="thecv[education.country]" class="form-control"  placeholder="Country" >			
+                        </div>
+                    </div>
+                      <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="education.start">Start Date:</label>
+                        </div>
+                            <div class="col-sm-3">	
+                                <select class="form-control" name="thecv[education.startmonth]" >
+                                <option>January</option>
+                                <option>February</option>
+                                <option>March</option>
+                                <option>April</option>
+                                <option>May</option>
+                                <option>June</option>
+                                <option>July</option>
+                                <option>August</option>
+                                <option>September</option>
+                                <option>October</option>
+                                <option>November</option>
+                                <option>December</option>
+                                </select>					
+                            </div>
+                            <div class="col-sm-2">	
+                                <select class="form-control" name="thecv[education.startyear]" >
+                                <option>2002</option>
+                                <option>2003</option>
+                                <option>2004</option>
+                                <option>2005</option>
+                                <option>2006</option>
+                                <option>2007</option>
+                                <option>2008</option>
+                                <option>2009</option>
+                                <option>2010</option>
+                                <option>2011</option>
+                                <option>2012</option>
+                                <option>2013</option>
+                                <option>2014</option>
+                                <option>2015</option>
+                                <option>2016</option>
+                                <option>2017</option>
+                                </select>					
+                            </div>
+                        </div> 
+                      <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="education.end">End Date:</label>
+                        </div>
+                            <div class="col-sm-3">	
+                                <select class="form-control" name="education.endmonth">
+                                <option>January</option>
+                                <option>February</option>
+                                <option>March</option>
+                                <option>April</option>
+                                <option>May</option>
+                                <option>June</option>
+                                <option>July</option>
+                                <option>August</option>
+                                <option>September</option>
+                                <option>October</option>
+                                <option>November</option>
+                                <option>December</option>
+                                </select>					
+                            </div>
+                            <div class="col-sm-2">	
+                                <select class="form-control" name="education.endyear">
+                                <option>2002</option>
+                                <option>2003</option>
+                                <option>2004</option>
+                                <option>2005</option>
+                                <option>2006</option>
+                                <option>2007</option>
+                                <option>2008</option>
+                                <option>2009</option>
+                                <option>2010</option>
+                                <option>2011</option>
+                                <option>2012</option>
+                                <option>2013</option>
+                                <option>2014</option>
+                                <option>2015</option>
+                                <option>2016</option>
+                                <option>2017</option>
+                                </select>					
+                            </div>
+                        </div> 
+                     <br />
+                                       </div>
+            </div>
+        
+</div>
+
+<button class="btn btn-primary">Submit</button>
+
+
+
+
+
+        <!-- Key Skills & Competencies -->
+<div class="col-sm-8 col-sm-offset-2">	 
+                 <div class="w3-accordion w3-light-grey">
+                  <button type="button" onclick="myFunction('keyskills')" class="w3-btn-block w3-left-align">Key Skills & Competencies</button>
+
+                  <div id="keyskills" class="w3-accordion-content w3-container">
+                   <br />
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="keyskills.title">Title:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" class="form-control" name="thecv[skills.name]" placeholder="Title">			
+                        </div>
+                    </div>
+                      <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="keyskills.description">Description:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <textarea name="thecv[skills.description]"  class="form-control" rows="4"></textarea>	
+                        </div>
+                    </div>
+                     <br />
+                </div>
+                                      </div>
+ </div>
+
+</div>
+
+
+
+<% include partials/footer %>

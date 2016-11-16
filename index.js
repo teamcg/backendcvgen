@@ -26,6 +26,10 @@ app.use(methodOverride("_method"));
 var Student = require('./models/student');
 var AuthKey = require('./models/authkey');
 var CV = require('./models/cv');
+var Experience = require('./models/experience');
+var Education = require('./models/education');
+var Skills = require('./models/skills');
+var TheCV = require('./models/thecv');
 
 
 //Import the routes
