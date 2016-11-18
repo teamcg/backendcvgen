@@ -17,18 +17,18 @@ var theCVSchema = new mongoose.Schema({
 			ref: 'Experience'
 		}
 	],
-	education: {
-		id: {
+	education: [
+		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Education'
 		}
-	},
-	skills:{
-		id: {
+	],
+	skills:[
+		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Skills'
 		}
-	}
+	]
 });
 
 module.exports = mongoose.model('thecv', theCVSchema);

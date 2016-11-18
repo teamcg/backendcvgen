@@ -286,7 +286,6 @@ router.get('/student2', function(req, res){
         if(err){
           console.log(err);
         } else {
-          console.log(foundFolder);
           res.render('studenttest', {loginStudent: loginStudent, foundFolder: foundFolder});
         }
       })
@@ -295,11 +294,10 @@ router.get('/student2', function(req, res){
 });
 
 router.get('/cvs/:cvid', function(req, res){
-  TheCV.findById(req.params.cvid).populate('experience').exec(function(err, foundCV){
+  TheCV.findById(req.params.cvid).populate('experience education skills').exec(function(err, foundCV){
     if(err){
       console.log(err);
     } else {
-      console.log(foundCV);
       res.render('fortest', {foundCV: foundCV});
       // res.send('hey');
     }
@@ -313,9 +311,6 @@ router.put('/cvs/:cvid', function(req,res){
     if(err){
       console.log(err);
     } else {
-      console.log('-----------------');
-      console.log(editCV);
-      console.log('-----------------');
       var docx = officegen('docx');
 
               //Personal Info

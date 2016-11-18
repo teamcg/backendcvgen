@@ -409,7 +409,12 @@ router.post('/pisubmit/:cvid', function(req, res){
 
 
 router.post('/pssubmit/:cvid', function(req, res){
-  TheCV.findByIdAndUpdate(req.params.cvid, req.body.ps, function(err, updateCV){
+  var personalStatement = {
+    personalstatement: req.body.thetextarea
+  }
+
+
+  TheCV.findByIdAndUpdate(req.params.cvid, personalStatement, function(err, updateCV){
     if(err){
       console.log(err);
     } else {
@@ -443,6 +448,57 @@ router.post('/expsubmit/:cvid', function(req, res){
           console.log(err);
         } else {
           updateCV.experience.push(newExperience);
+          updateCV.save();
+          res.redirect('/cvs/' + req.params.cvid);
+        }
+      });
+    }
+  });
+});
+
+router.post('/edusubmit/:cvid', function(req, res){
+  var eduData = {
+    category: req.body.educategory,
+    degree: req.body.edudegree,
+    school: req.body.eduschool,
+    city: req.body.educity,
+    country: req.body.educountry,
+    startmonth: req.body.edustartmonth,
+    startyear: req.body.edustartyear,
+    endmonth: req.body.eduendmonth,
+    endyear: req.body.eduendyear
+  }
+
+  Education.create(eduData, function(err, newEducation){
+    if(err){
+      console.log(err);
+    } else {
+      TheCV.findById(req.params.cvid, function(err, updateCV){
+        updateCV.education.push(newEducation);
+        updateCV.save();
+        res.redirect('/cvs/' + req.params.cvid);
+      });
+    }
+  })
+
+});
+
+
+router.post('/skillsubmit/:cvid', function(req, res){
+  var skillData = {
+    name: req.body.skillname,
+    description: req.body.skilldescription
+  }
+
+  Skills.create(skillData, function(err, newSkill){
+    if(err){
+      console.log(err);
+    } else {
+      TheCV.findById(req.params.cvid, function(err, updateCV){
+        if(err){
+          console.log(err);
+        } else {
+          updateCV.skills.push(newSkill);
           updateCV.save();
           res.redirect('/cvs/' + req.params.cvid);
         }

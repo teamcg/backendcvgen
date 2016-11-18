@@ -77,9 +77,10 @@
                         </div>
                     </div>
                      <br />
+                     <button class="btn btn-primary">Submit</button>
                </div>
             </div>
-            <button class="btn btn-primary">Submit</button>
+            
 </div>
 
 </form>
@@ -94,14 +95,16 @@
                     <div class="row">
                        <div class="col-sm-6 col-sm-offset-2">
                                 <br />
-                                  <input type="text" name="ps[personalstatement]" value="<%= foundCV.personalstatement%>">
+                                  <!-- <input type="text" name="ps[personalstatement]" value="<%= foundCV.personalstatement%>"> -->
+                                  <textarea name="thetextarea"><%= foundCV.personalstatement %></textarea>
                            <br />			
                          </div>
                     </div>
                      <br />
+                                    <button class="btn btn-success">Submit</button>
+  
                 </div>
-                <button class="btn btn-success">Submit</button>
-                                      </div>
+                                     </div>
  </div>
 
  </form>
@@ -112,7 +115,7 @@
                  <div class="w3-accordion w3-light-grey">
                   <button type="button" onclick="myFunction('experience')" class="w3-btn-block w3-left-align">Experience</button>
      
-                  <div id="experience" class="w3-accordion-content w3-container">  
+                  <div id="experience" class="w3-accordion- tent w3-container">  
                    <br />
                     <div class="row">
                         <div class="col-sm-3 control-label"> 
@@ -248,19 +251,23 @@
                             </div>
                         </div> 
                      <br />
-                                       </div>
-<% foundCV.experience.forEach(function(experience){ %>
-    <h1><%= experience %></h1>
-<% }); %>
 <button class="btn btn-primary">Submit</button>
+<% foundCV.experience.forEach(function(experience){ %>
+    <h1><%= experience.role %></h1>
+<% }); %>
+                                       </div>
+
+
+
+
             </div>
 </div>
 </form>
     <!-- Education -->
-    
+<form action="/edusubmit/<%= foundCV.id%>" method="POST">
     <div class="col-sm-8 col-sm-offset-2">	
                  <div class="w3-accordion w3-light-grey">
-                  <button type="onclick" onclick="myFunction('education')" class="w3-btn-block w3-left-align">Education</button>
+                  <button type="button" onclick="myFunction('education')" class="w3-btn-block w3-left-align">Education</button>
 
                   <div id="education" class="w3-accordion-content w3-container">  
                    <br />
@@ -269,7 +276,7 @@
                             <label for="education.category">Category:</label>
                         </div>
                         <div class="col-sm-5">	
-                            <select class="form-control" name="thecv[education.category]" autofocus>
+                            <select class="form-control" name="educategory" autofocus>
                               <option>Category 1</option>
                               <option>Category 2</option> 
                             </select>			
@@ -277,18 +284,26 @@
                       </div>
                       <div class="row">
                         <div class="col-sm-3 control-label">
+                            <label>Degree</label>
+                        </div>
+                        <div class="col-sm-5">  
+                            <input type="text" class="form-control" name="edudegree" placeholder="Degree" >                
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-3 control-label">
                             <label for="education.school">School Name:</label>
                         </div>
                         <div class="col-sm-5">	
-                            <input type="text" class="form-control" name="thecv[experience.school]" placeholder="School Name" >				
+                            <input type="text" class="form-control" name="eduschool" placeholder="School Name" >				
                         </div>
-                    </div>
+                      </div>
                     <div class="row">
                         <div class="col-md-3 control-label">
                             <label for="education.city">City:</label>
                         </div>
                         <div class="col-sm-5">	
-                            <input type="text" class="form-control" name="thecv[education.city]" placeholder="City" >				
+                            <input type="text" class="form-control" name="educity" placeholder="City" >				
                         </div>
                     </div>
                     <div class="row">
@@ -296,7 +311,7 @@
                             <label for="education.country">Country:</label>
                         </div>
                         <div class="col-sm-5">	
-                            <input type="text" name="thecv[education.country]" class="form-control"  placeholder="Country" >			
+                            <input type="text" name="educountry" class="form-control"  placeholder="Country" >			
                         </div>
                     </div>
                       <div class="row">
@@ -304,7 +319,7 @@
                             <label for="education.start">Start Date:</label>
                         </div>
                             <div class="col-sm-3">	
-                                <select class="form-control" name="thecv[education.startmonth]" >
+                                <select class="form-control" name="edustartmonth" >
                                 <option>January</option>
                                 <option>February</option>
                                 <option>March</option>
@@ -320,7 +335,7 @@
                                 </select>					
                             </div>
                             <div class="col-sm-2">	
-                                <select class="form-control" name="thecv[education.startyear]" >
+                                <select class="form-control" name="edustartyear" >
                                 <option>2002</option>
                                 <option>2003</option>
                                 <option>2004</option>
@@ -345,7 +360,7 @@
                             <label for="education.end">End Date:</label>
                         </div>
                             <div class="col-sm-3">	
-                                <select class="form-control" name="education.endmonth">
+                                <select class="form-control" name="eduendmonth">
                                 <option>January</option>
                                 <option>February</option>
                                 <option>March</option>
@@ -361,7 +376,7 @@
                                 </select>					
                             </div>
                             <div class="col-sm-2">	
-                                <select class="form-control" name="education.endyear">
+                                <select class="form-control" name="eduendyear">
                                 <option>2002</option>
                                 <option>2003</option>
                                 <option>2004</option>
@@ -382,17 +397,25 @@
                             </div>
                         </div> 
                      <br />
+<button class="btn btn-primary">Save education</button>
+<% foundCV.education.forEach(function(education){ %>
+    <h1><%= education.school %></h1>
+<% }); %>
                                        </div>
             </div>
-        
+
+
+
 </div>
 
-<button class="btn btn-primary">Submit</button>
+
+
+</form>
 
 
 
 
-
+<form action="/skillsubmit/<%= foundCV.id %>" method="POST">
         <!-- Key Skills & Competencies -->
 <div class="col-sm-8 col-sm-offset-2">	 
                  <div class="w3-accordion w3-light-grey">
@@ -405,7 +428,7 @@
                             <label for="keyskills.title">Title:</label>
                         </div>
                         <div class="col-sm-5">	
-                            <input type="text" class="form-control" name="thecv[skills.name]" placeholder="Title">			
+                            <input type="text" class="form-control" name="skillname" placeholder="Title">			
                         </div>
                     </div>
                       <div class="row">
@@ -413,16 +436,24 @@
                             <label for="keyskills.description">Description:</label>
                         </div>
                         <div class="col-sm-5">	
-                            <textarea name="thecv[skills.description]"  class="form-control" rows="4"></textarea>	
+                            <textarea name="skilldescription"  class="form-control" rows="4"></textarea>	
                         </div>
                     </div>
                      <br />
+                     <button class="btn btn-danger">Save Skill</button>
+                     <% foundCV.skills.forEach(function(skill){ %>
+    <h1><%= skill.name %></h1>
+<% }); %>
                 </div>
+
+
+
                                       </div>
+
  </div>
 
 </div>
-
+</form>
 
 
 <% include partials/footer %>
