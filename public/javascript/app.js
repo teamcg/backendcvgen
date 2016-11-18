@@ -37,7 +37,20 @@ function myFunction(id) {
     }
 }
 
+  function openScreen(evt, screenName) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("screen");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" w3-orange", "");
+    }
+    document.getElementById(screenName).style.display = "block";
 
+  }
+openScreen(event, 'SCEditCV');
 
 
 var removeThis = function(){
@@ -47,19 +60,70 @@ var removeThis = function(){
 }
 
 
-$(function(){
-
 
  $('.btnremove').on('click', function(){
     $(this).parent('div').remove();
   }); 
 
+//  $('#newcvBTN').click(function(){
+//     newCV();
+//  });
 
-})
- 
+//  $('#checkIdBTN').click(function(){
+//   alert(CVID);
+//  });
 
+//  $('#piSubmitBTN').click(function(){
+//     piSubmit();
+//  });
 
+// var CVID = '';
 
+// function newCV(){
+
+//   var createCV = {
+//     createdCV: $('#newcvInput').val()
+//   }
+
+//   $.ajax({
+//     type: 'POST',
+//     url: '/newcv',
+//     data: JSON.stringify(createCV),
+//     contentType: 'application/json',
+//     dataType: 'json',
+//     success: function(data){
+//       CVID = JSON.stringify(data._id);
+//     },
+//     error: function(err){
+//       alert(err);
+//     }
+//   });
+// }
+
+// function piSubmit(){
+
+//   alert($('#fnInfo').val() + ' ' + $('#lnInfo').val());
+
+//   var piData = {
+//     firstname: $('#fnInfo').val(),
+//     lastname: $('#lnInfo').val()
+//   }
+
+//   $.ajax({
+//     type: 'POST',
+//     url: '/pisubmit/' + CVID,
+//     data: JSON.stringify(piData),
+//     contentType: 'application/json',
+//     dataType: 'json',
+//     success: function(data){
+//       alert(JSON.stringify(data));
+//     },
+//     error: function(err){
+//       alert(err);
+//     }
+//   });
+
+// }
 
 
 

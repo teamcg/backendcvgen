@@ -2,7 +2,9 @@
 
 <div class="w3-container">
 
-<%= foundCV %>
+<a href="/student2" class="btn btn-primary">Go Back</a>
+
+<h1 class="text-center">CV: <%= foundCV.cvname %> </h1>
     <!-- Personal Info -->
 <form action="/pisubmit/<%= foundCV.id %>" method="POST">
 <div class="col-sm-8 col-sm-offset-2">

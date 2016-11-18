@@ -364,6 +364,11 @@ router.get('/fortest', function(req, res){
 });
 
 router.post('/newcv', function(req, res){
+  var cvName = req.body.thecvname;
+  var docx = officegen('docx');
+
+
+
   var thecvname = {
     cvname: req.body.thecvname,
   };
@@ -375,6 +380,34 @@ router.post('/newcv', function(req, res){
         if(err){
           console.log(err);
         } else {
+
+var pObjHead = docx.createP();
+    pObjHead.addText(theStudent.fullname.toString(), {bold: true, font_size: 20, font_face: 'Arial'});
+    pObjHead.addLineBreak();
+    pObjHead.addText('Email: ' + theStudent.email.toString(), {font_size: 12, font_face: 'Arial'});
+
+var named = './CV/' + theStudent.fullname + '.' + theStudent.username + '/' + cvName + '.docx';
+var out = fs.createWriteStream ( named.replace(/\s/g,''));
+
+out.on ( 'error', function ( err ) {
+                console.log ( err );
+              });
+
+              async.parallel ([
+                function ( done ) {
+                  out.on ( 'close', function () {
+                    console.log ( 'Created a CV for ' + theStudent.fullname );
+                    done ( null );
+                  });
+                  docx.generate ( out );
+                }
+
+              ], function ( err ) {
+                if ( err ) {
+                  console.log ( 'error: ' + err );
+                } 
+              });
+
           var cvid = newCV.id;
           theStudent.cv.push(newCV);
           theStudent.save();

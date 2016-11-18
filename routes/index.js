@@ -286,7 +286,7 @@ router.get('/student2', function(req, res){
         if(err){
           console.log(err);
         } else {
-          res.render('studenttest', {loginStudent: loginStudent, foundFolder: foundFolder});
+          res.render('demo', {loginStudent: loginStudent, foundFolder: foundFolder});
         }
       })
     }
@@ -374,5 +374,9 @@ router.put('/cvs/:cvid', function(req,res){
 
 
 
+
+router.get('/demo', function(req, res){
+  res.render('demo');
+});
 
 module.exports = router;

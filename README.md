@@ -64,6 +64,9 @@ Nov 16 <br>
 Nov 18 <br>
 -- Successfully working experience fields, skills and education. All of them are pushed to theCV <br>
 
+Nov 19 <br>
+-- integrated Victor's student portal page <br>
+
 
 Cheers! <br>
 

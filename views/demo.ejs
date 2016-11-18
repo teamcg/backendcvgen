@@ -1,0 +1,59 @@
+<% include partials/header %>
+		<div class="w3-container">
+			<div class="col-sm-8 col-sm-offset-2">
+				<ul class="w3-navbar w3-black">
+					<li><a href="javascript:void(0)" class="tablink" onclick="openScreen(event, 'SCProfile');">My profile</a></li>
+					<li><a href="javascript:void(0)" class="tablink" onclick="openScreen(event, 'SCEditCV');">Create CV</a></li>
+					<li><a href="javascript:void(0)" class="tablink" onclick="openScreen(event, 'SCShowAll');">My CVs</a></li>
+				</ul>
+				
+				<div id="SCEditCV" class="w3-container screen">
+					<!-- surrinder's code -->
+					
+					<form action="/newcv" method='POST'>
+						<input type="text" name="thecvname" required>
+						<button class="btn btn-primary">Create CV</button>
+					</form>
+
+				</div>
+				
+				<div id="SCProfile" class="w3-container screen">
+			<h3> Fullname: <%= loginStudent.fullname %></h3>
+				</div>
+
+				<div id="SCShowAll" class="w3-container screen">
+					<h2>My CVs</h2>
+					<table class="w3-table">
+						<tr>
+						  <th>CV Name</th>
+						  <th>Download</th>
+						</tr>
+						<% loginStudent.cv.forEach(function(theCV){ %>
+							<tr>
+								<td>
+									<a href="/cvs/<%= theCV._id %>">
+										<%= theCV.cvname %>
+									</a>
+								</td>
+								<td>
+									<a href="./CV/<%= loginStudent.folder %>/<%= theCV.cvname.replace(/\s/g,'')%>.docx">
+										Download
+									</a>
+								</td>
+							</tr>
+						<% }) %>
+						
+					  </table>
+				</div>
+			</div>
+			
+			
+			
+	
+	
+
+
+
+</div>
+
+<% include partials/footer %>
