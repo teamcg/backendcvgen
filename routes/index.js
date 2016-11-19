@@ -298,7 +298,8 @@ router.get('/cvs/:cvid', function(req, res){
     if(err){
       console.log(err);
     } else {
-      res.render('fortest', {foundCV: foundCV});
+
+      res.render('studenttest', {foundCV: foundCV});
       // res.send('hey');
     }
   });

@@ -66,6 +66,7 @@ Nov 18 <br>
 
 Nov 19 <br>
 -- integrated Victor's student portal page <br>
+-- tried ajax on Personal info, it post's data and updates the mongodb, but the data's returning on ajax is the old one <br>
 
 
 Cheers! <br>

@@ -431,11 +431,24 @@ router.post('/fortesting', function(req, res){
 
 
 router.post('/pisubmit/:cvid', function(req, res){
-  TheCV.findByIdAndUpdate(req.params.cvid, req.body.pi, function(err, updateCV){
+  var piData = {
+    firstname: req.body.theFN,
+    lastname: req.body.theLN,
+    address: req.body.theAddress,
+    suburb: req.body.theSuburb,
+    city: req.body.theCity,
+    postcode: req.body.thePostcode,
+    mobilephone: req.body.theMobilephone,
+    email: req.body.theEmail
+  }
+
+
+  TheCV.findByIdAndUpdate(req.params.cvid, piData, function(err, updateCV){
     if(err){
       console.log(err);
     } else {
-      res.redirect('/cvs/' + req.params.cvid);
+      // res.redirect('/cvs/' + req.params.cvid);
+      res.send(updateCV);
     }
   });
 });

@@ -6,7 +6,7 @@
 
 <h1 class="text-center">CV: <%= foundCV.cvname %> </h1>
     <!-- Personal Info -->
-<form action="/pisubmit/<%= foundCV.id %>" method="POST">
+
 <div class="col-sm-8 col-sm-offset-2">
                  <div class="w3-accordion w3-light-grey">
                   <button type="button" onclick="myFunction('personalinfo')" class="w3-btn-block w3-left-align">Personal Info</button>
@@ -19,7 +19,7 @@
                             <label for="first name">First Name:</label>
                         </div>
                         <div class="col-sm-5">	
-                            <input type="text" class="form-control" name="pi[firstname]" placeholder="First Name" value="<%= foundCV.firstname %>">			
+                            <input type="text" id="fnPI" class="form-control" name="pi[firstname]" placeholder="First Name" value="<%= foundCV.firstname %>">			
                         </div>
                     </div>
                     <div class="row">
@@ -27,7 +27,7 @@
                             <label for="last name">Last Name:</label>
                         </div>
                         <div class="col-sm-5">	
-                            <input type="text" class="form-control" name="pi[lastname]" placeholder="Last Name" value="<%= foundCV.lastname %>">				
+                            <input type="text" class="form-control" name="pi[lastname]" placeholder="Last Name" id="lnPI" value="<%= foundCV.lastname %>">				
                         </div>
                     </div>
                     <div class="row">
@@ -79,15 +79,15 @@
                         </div>
                     </div>
                      <br />
-                     <button class="btn btn-primary">Submit</button>
+                     <button class="btn btn-primary" id="piBTN">Submit</button>
                </div>
             </div>
             
 </div>
 
-</form>
+
      <!-- Personal Statement -->
-<form action='/pssubmit/<%= foundCV.id %>' method='POST'>
+<!-- <form action='/pssubmit/<%= foundCV.id %>' method='POST'> -->
 <div class="col-sm-8 col-sm-offset-2">	 
                  <div class="w3-accordion w3-light-grey">
                   <button type="button" onclick="myFunction('personalstatement')" class="w3-btn-block w3-left-align">Personal Statement</button>
@@ -98,18 +98,18 @@
                        <div class="col-sm-6 col-sm-offset-2">
                                 <br />
                                   <!-- <input type="text" name="ps[personalstatement]" value="<%= foundCV.personalstatement%>"> -->
-                                  <textarea name="thetextarea"><%= foundCV.personalstatement %></textarea>
+                                  <textarea name="thetextarea" id="PSInput"><%= foundCV.personalstatement %></textarea>
                            <br />			
                          </div>
                     </div>
                      <br />
-                                    <button class="btn btn-success">Submit</button>
+                                    <button class="btn btn-success" id="psSubmitBTN">Submit</button>
   
                 </div>
                                      </div>
  </div>
 
- </form>
+<!--  </form> -->
  
             <!-- Experience -->
 <form action="/expsubmit/<%= foundCV.id %>" method="POST">

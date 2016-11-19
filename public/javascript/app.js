@@ -47,10 +47,9 @@ function myFunction(id) {
     for (i = 0; i < x.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(" w3-orange", "");
     }
-    document.getElementById(screenName).style.display = "block";
 
   }
-openScreen(event, 'SCEditCV');
+openScreen(event, 'SCEditCV ');
 
 
 var removeThis = function(){
@@ -73,9 +72,13 @@ var removeThis = function(){
 //   alert(CVID);
 //  });
 
-//  $('#piSubmitBTN').click(function(){
-//     piSubmit();
-//  });
+ $('#piBTN').click(function(){
+    piSubmit();
+ });
+
+ $('#psSubmitBTN').click(function(){
+  alert('hey');
+ });
 
 // var CVID = '';
 
@@ -100,30 +103,35 @@ var removeThis = function(){
 //   });
 // }
 
-// function piSubmit(){
+function piSubmit(){
 
-//   alert($('#fnInfo').val() + ' ' + $('#lnInfo').val());
 
-//   var piData = {
-//     firstname: $('#fnInfo').val(),
-//     lastname: $('#lnInfo').val()
-//   }
+  var piData = {
+    theFN: $('#fnPI').val(),
+    theLN: $('#lnPI').val(),
+    theAddress: $('#addressPI').val(),
+    theSuburb: $('#suburbPI').val(),
+    theCity: $('#cityPI').val(),
+    thePostcode: $('#postcodePI').val(),
+    theMobilephone: $('#mobilephonePI').val(),
+    theEmail: $('#emailPI').val()
+  }
 
-//   $.ajax({
-//     type: 'POST',
-//     url: '/pisubmit/' + CVID,
-//     data: JSON.stringify(piData),
-//     contentType: 'application/json',
-//     dataType: 'json',
-//     success: function(data){
-//       alert(JSON.stringify(data));
-//     },
-//     error: function(err){
-//       alert(err);
-//     }
-//   });
+  $.ajax({
+    type: 'POST',
+    url: '/pisubmit/' + $('#cvID').text(),
+    data: JSON.stringify(piData),
+    contentType: 'application/json',
+    dataType: 'json',
+    success: function(data){
+      $('#MessHere').append(JSON.stringify(data));
+    },
+    error: function(err){
+      alert(err);
+    }
+  });
 
-// }
+}
 
 
 

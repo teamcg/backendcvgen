@@ -1,35 +1,107 @@
 <% include partials/header %>
 
-<div class='container text-center'>
-	<h2>Welcome student <%= loginStudent %></h2> 
+<%= foundCV %>
+
+<h3 id="cvID" style="display: none"><%= foundCV._id %></h3>
+<div class="col-sm-8 col-sm-offset-2">
+                 <div class="w3-accordion w3-light-grey">
+                  <button type="button" onclick="myFunction('personalinfo')" class="w3-btn-block w3-left-align">Personal Info</button>
+
+                  <div id="personalinfo" class="w3-accordion-content w3-container">
+                  
+                   <br />
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="first name">First Name:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" id="fnPI" class="form-control" name="pi[firstname]" placeholder="First Name" value="<%= foundCV.firstname %>">			
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="last name">Last Name:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" class="form-control" name="pi[lastname]" placeholder="Last Name" id="lnPI" value="<%= foundCV.lastname %>">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="address">Address:</label>
+                        </div>
+                        <div class="col-sm-5">	 
+                            <input type="text" id="addressPI" class="form-control" name="pi[address]" placeholder="Address" value="<%= foundCV.address %>">						
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="suburb">Suburb:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" id="suburbPI" class="form-control" name="pi[suburb]" placeholder="Suburb" value="<%= foundCV.suburb %>">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 control-label">
+                            <label for="city">City:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" id="cityPI" class="form-control" name="pi[city]" placeholder="City" value="<%= foundCV.city %>">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="postcode">Post Code:</label>
+                        </div>
+                        <div class="col-sm-3">	
+                            <input type="text" id='postcodePI' name="pi[postcode]" class="form-control" placeholder="Post Code" value="<%= foundCV.postcode %>">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="phone">Mobile Phone:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="number" id="mobilephonePI" class="form-control" name="pi[mobilephone]" placeholder="Mobile Phone" value="<%= foundCV.mobilephone %>">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="email">Email:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" id="emailPI" class="form-control" name="pi[email]"  placeholder="abc@domain.com" value="<%= foundCV.email %>">				
+                        </div>
+                    </div>
+                    <span id="MessHere"></span>
+                     <br />
+                     <button class="btn btn-primary" id="piBTN">Submit</button>
+               </div>
+            </div>
+            
 </div>
 
+<div class="col-sm-8 col-sm-offset-2">	 
+                 <div class="w3-accordion w3-light-grey">
+                  <button type="button" onclick="myFunction('personalstatement')" class="w3-btn-block w3-left-align">Personal Statement</button>
 
-<% loginStudent.cv.forEach(function(theCV){ %>
-
-	<div class="container">
-	<div class="row">
-		<div class="col-md-4">
-			<a href="/cvs/<%= theCV._id%>">
-				<h2><%= theCV.cvname.replace(/\s/g,'') %></h2>
-			</a>
-			<a href="./CV/<%= loginStudent.folder %>/<%= theCV.cvname.replace(/\s/g,'')%>.docx">
-				<h3>Download</h3>
-			</a>
-		</div>
-	</div>
-</div>
-<% }); %>
-
-
-
-
-<form action="/newcv" method='POST'>
-<input type="text" name="thecvname" required>
-	<button class="btn btn-primary">Create CV</button>
-</form>
-
-
+                  <div id="personalstatement" class="w3-accordion-content w3-container">
+                   <br />
+                    <div class="row">
+                       <div class="col-sm-6 col-sm-offset-2">
+                                <br />
+                                  <!-- <input type="text" name="ps[personalstatement]" value="<%= foundCV.personalstatement%>"> -->
+                                  <textarea name="thetextarea" id="PSInput"><%= foundCV.personalstatement %></textarea>
+                           <br />			
+                         </div>
+                    </div>
+                     <br />
+                                    <button class="btn btn-success" id="psSubmitBTN">Submit</button>
+  
+                </div>
+                                     </div>
+ </div>
 
 
 
