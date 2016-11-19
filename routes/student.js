@@ -443,7 +443,7 @@ router.post('/pisubmit/:cvid', function(req, res){
   }
 
 
-  TheCV.findByIdAndUpdate(req.params.cvid, piData, function(err, updateCV){
+  TheCV.findByIdAndUpdate(req.params.cvid, piData, {new: true}, function(err, updateCV){
     if(err){
       console.log(err);
     } else {
@@ -455,32 +455,37 @@ router.post('/pisubmit/:cvid', function(req, res){
 
 
 router.post('/pssubmit/:cvid', function(req, res){
+
+
   var personalStatement = {
-    personalstatement: req.body.thetextarea
+    personalstatement: req.body.thePersonalStatement
   }
 
 
-  TheCV.findByIdAndUpdate(req.params.cvid, personalStatement, function(err, updateCV){
+  TheCV.findByIdAndUpdate(req.params.cvid, personalStatement, {new: tru}, function(err, updateCV){
     if(err){
       console.log(err);
     } else {
-      res.redirect('/cvs/' + req.params.cvid);
+      // res.redirect('/cvs/' + req.params.cvid);
+      res.send(updateCV);
     }
   });
 });
 
+
+// Create new Experience
 router.post('/expsubmit/:cvid', function(req, res){
   var expData = {
-    category: req.body.expcategory,
-    role: req.body.exprole,
-    companydescription: req.body.expcompanydescription,
-    company: req.body.expcompany,
-    city: req.body.expcity,
-    country: req.body.expcountry,
-    startmonth: req.body.expstartmonth,
-    startyear: req.body.expstartyear,
-    endmonth: req.body.expendmonth,
-    endyear: req.body.expendyear
+    category: req.body.theExpCategory,
+    role: req.body.theExpRole,
+    companydescription: req.body.theExpCompanyDescription,
+    company: req.body.theExpCompany,
+    city: req.body.theExpCity,
+    country: req.body.theExpCountry,
+    startmonth: req.body.theExpStartDate,
+    startyear: req.body.theExpStartYear,
+    endmonth: req.body.theExpEndDate,
+    endyear: req.body.theExpEndYear
 
   }
 
@@ -495,11 +500,62 @@ router.post('/expsubmit/:cvid', function(req, res){
         } else {
           updateCV.experience.push(newExperience);
           updateCV.save();
-          res.redirect('/cvs/' + req.params.cvid);
+          // res.redirect('/cvs/' + req.params.cvid);
+          res.send(newExperience);
         }
       });
     }
   });
+});
+
+
+//QUERY experience (for AJAX)
+router.get('/cvs/:cvid/exp/:expid', function(req, res){
+  Experience.findOne({_id: req.params.expid}, function(err, foundExp){
+    if(err){
+      console.log(err);
+    } else {
+      res.send(foundExp);
+    }
+  });
+});
+
+//Delete Experience (for AJAX)
+router.delete('/cvs/:cvid/exp/:expid', function(req, res){
+  Experience.findByIdAndRemove({_id: req.params.expid}, function(err, deletedExp){
+    if(err){
+      console.log(err);
+    } else {
+      console.log('Deleted ' + deletedExp);
+      res.redirect('back');
+    }
+  })
+})
+
+//Edit the Experience
+router.post('/expsubmit/:cvid/exp/:expid', function(req, res){
+  var editExpData = {
+    category: req.body.theExpCategory,
+    role: req.body.theExpRole,
+    companydescription: req.body.theExpCompanyDescription,
+    company: req.body.theExpCompany,
+    city: req.body.theExpCity,
+    country: req.body.theExpCountry,
+    startmonth: req.body.theExpStartDate,
+    startyear: req.body.theExpStartYear,
+    endmonth: req.body.theExpEndDate,
+    endyear: req.body.theExpEndYear
+
+  }
+
+  Experience.findByIdAndUpdate(req.params.expid, editExpData, {new: true}, function(err, updatedExp){
+    if(err){
+      console.log(err);
+    } else {
+      res.send(updatedExp);
+    }
+  });
+
 });
 
 router.post('/edusubmit/:cvid', function(req, res){
@@ -552,6 +608,9 @@ router.post('/skillsubmit/:cvid', function(req, res){
     }
   });
 });
+
+
+
 
 
 module.exports = router;

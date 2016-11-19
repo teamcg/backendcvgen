@@ -68,6 +68,10 @@ Nov 19 <br>
 -- integrated Victor's student portal page <br>
 -- tried ajax on Personal info, it post's data and updates the mongodb, but the data's returning on ajax is the old one <br>
 
+Nov 20 <br>
+-- AJAX (POST request) working on Personal Info, personal statement and Experience <br>
+-- Added edit and delete request for each experience field. Edit function is halfway complete <br>
+
 
 Cheers! <br>
 

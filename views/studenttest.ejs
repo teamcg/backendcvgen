@@ -106,5 +106,171 @@
 
 
 
+<div class="col-sm-8 col-sm-offset-2">	
+
+                 <div class="w3-accordion w3-light-grey">
+                  <button type="button" onclick="myFunction('experience')" class="w3-btn-block w3-left-align">Experience</button>
+     
+                  <div id="experience" class="w3-accordion- tent w3-container">  
+                   <br />
+                   <h2 class="text-center" id="editingHeading"></h2>
+                    <div class="row">
+                        <div class="col-sm-3 control-label"> 
+                            <label for="experience.category">Category:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <select class="form-control" id="expCategory" name="expcategory" autofocus>
+                              <option>Technology</option>
+                              <option>Healthcare</option> 
+                              <option>Business</option> 
+                            </select>			
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="experience.role">Role:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" id="expRole" class="form-control" name="exprole" placeholder="Role">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="experience.company">Company Description:</label>
+                        </div>
+                        <div class="col-sm-5">	 
+                            <textarea name="expcompanydescription" id="expCompanyDescription" class="form-control" rows="4"></textarea>					
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="experience.company">Company:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" name="expcompany" id="expCompany" class="form-control" placeholder="Company">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 control-label">
+                            <label for="experience.city">City:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" class="form-control" id="expCity" name="expcity" placeholder="City">				
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="experience.country">Country:</label>
+                        </div>
+                        <div class="col-sm-5">	
+                            <input type="text" name="expcountry" id="expCountry" class="form-control"  placeholder="Country">			
+                        </div>
+                    </div>
+                      <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="experience.start">Start Date:</label>
+                        </div>
+                            <div class="col-sm-3">	
+                                <select class="form-control" id="expStartDate" name="expstartmonth" >
+                                <option>January</option>
+                                <option>February</option>
+                                <option>March</option>
+                                <option>April</option>
+                                <option>May</option>
+                                <option>June</option>
+                                <option>July</option>
+                                <option>August</option>
+                                <option>September</option>
+                                <option>October</option>
+                                <option>November</option>
+                                <option>December</option>
+                                </select>					
+                            </div>
+                            <div class="col-sm-2">	
+                                <select class="form-control" id="expStartYear" name="expstartyear" >
+                                <option>2002</option>
+                                <option>2003</option>
+                                <option>2004</option>
+                                <option>2005</option>
+                                <option>2006</option>
+                                <option>2007</option>
+                                <option>2008</option>
+                                <option>2009</option>
+                                <option>2010</option>
+                                <option>2011</option>
+                                <option>2012</option>
+                                <option>2013</option>
+                                <option>2014</option>
+                                <option>2015</option>
+                                <option>2016</option>
+                                <option>2017</option>
+                                </select>					
+                            </div>
+                        </div> 
+                      <div class="row">
+                        <div class="col-sm-3 control-label">
+                            <label for="experience.end">End Date:</label>
+                        </div>
+                            <div class="col-sm-3">	
+                                <select class="form-control" id="expEndDate" name="expendmonth">
+                                <option>January</option>
+                                <option>February</option>
+                                <option>March</option>
+                                <option>April</option>
+                                <option>May</option>
+                                <option>June</option>
+                                <option>July</option>
+                                <option>August</option>
+                                <option>September</option>
+                                <option>October</option>
+                                <option>November</option>
+                                <option>December</option>
+                                </select>					
+                            </div>
+                            <div class="col-sm-2">	
+                                <select class="form-control" id="expEndYear" name="expendyear">
+                                <option>2002</option>
+                                <option>2003</option>
+                                <option>2004</option>
+                                <option>2005</option>
+                                <option>2006</option>
+                                <option>2007</option>
+                                <option>2008</option>
+                                <option>2009</option>
+                                <option>2010</option>
+                                <option>2011</option>
+                                <option>2012</option>
+                                <option>2013</option>
+                                <option>2014</option>
+                                <option>2015</option>
+                                <option>2016</option>
+                                <option>2017</option>
+                                </select>					
+                            </div>
+                        </div> 
+                     <br />
+<button class="btn btn-primary" id="expSubmitBTN">Submit</button>
+
+<% foundCV.experience.forEach(function(experience){ %>
+<div class="theContent">
+    <h1 class="theText"><%= experience.role %></h1>
+    	<button class="btn btn-primary editExpBTN">EDIT</button>
+    	<form action="/cvs/<%= foundCV._id %>/exp/<%= experience._id %>?_method=DELETE" method="POST">
+    		<button class="btn btn-danger deleteExpBTN">Delete</button>
+    	</form>
+    <h6 style="display: none" class="theId"><%= experience._id %></h6>
+    </div> 
+<% }); %>
+                                     
+ </div>
+
+
+
+
+            </div>
+</div>
+
+
+
 
 <% include partials/footer %>

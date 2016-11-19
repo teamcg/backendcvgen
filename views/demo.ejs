@@ -56,4 +56,31 @@
 
 </div>
 
+
+
+
+
+					<h2>My CVs</h2>
+					<table class="w3-table">
+						<tr>
+						  <th>CV Name</th>
+						  <th>Download</th>
+						</tr>
+						<% loginStudent.cv.forEach(function(theCV){ %>
+							<tr>
+								<td>
+									<a href="/cvs/<%= theCV._id %>">
+										<%= theCV.cvname %>
+									</a>
+								</td>
+								<td>
+									<a href="./CV/<%= loginStudent.folder %>/<%= theCV.cvname.replace(/\s/g,'')%>.docx">
+										Download
+									</a>
+								</td>
+							</tr>
+						<% }) %>
+						
+					  </table>
+
 <% include partials/footer %>

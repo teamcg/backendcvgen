@@ -64,49 +64,58 @@ var removeThis = function(){
     $(this).parent('div').remove();
   }); 
 
-//  $('#newcvBTN').click(function(){
-//     newCV();
-//  });
-
-//  $('#checkIdBTN').click(function(){
-//   alert(CVID);
-//  });
 
  $('#piBTN').click(function(){
     piSubmit();
  });
 
  $('#psSubmitBTN').click(function(){
-  alert('hey');
+  psSubmit();
  });
 
-// var CVID = '';
+ $('#expSubmitBTN').click(function(){
+  expSubmit();
+ });
 
-// function newCV(){
+ $('.editExpBTN').click(function(){
+  var $text = $(this).parents('.theContent').find('.theId');
 
-//   var createCV = {
-//     createdCV: $('#newcvInput').val()
-//   }
+  var theExpData = {
+    theID: $text.text()
+  }
 
-//   $.ajax({
-//     type: 'POST',
-//     url: '/newcv',
-//     data: JSON.stringify(createCV),
-//     contentType: 'application/json',
-//     dataType: 'json',
-//     success: function(data){
-//       CVID = JSON.stringify(data._id);
-//     },
-//     error: function(err){
-//       alert(err);
-//     }
-//   });
-// }
+  $.ajax({
+    type:'GET',
+    url: '/cvs/' + $('#cvID').text() + '/exp/' + $text.text(),
+    data: JSON.stringify(theExpData),
+    contentType: 'application/json',
+    dataType: 'json',
+    success: function(data){
+      $('#editingHeading').text('Editing ' + JSON.stringify(data.role));
+      $('#expRole').val(data.role);
+      $('#expCategory').val(data.category);
+      $('#expCompanyDescription').val(data.companydescription);
+      $('#expCompany').val(data.company);
+      $('#expCity').val(data.city);
+      $('#expCountry').val(data.country);
+      $('#expStartDate').val(data.startmonth);
+      $('#expStartYear').val(data.startyear);
+      $('#expEndDate').val(data.endmonth);
+      $('#expEndYear').val(data.endyear);
+    },
+    error: function(err){
+      alert(err);
+    }
 
+  });
+ });
+
+
+
+//Personal info Function
 function piSubmit(){
 
-
-  var piData = {
+  var personalInfoData = {
     theFN: $('#fnPI').val(),
     theLN: $('#lnPI').val(),
     theAddress: $('#addressPI').val(),
@@ -120,7 +129,7 @@ function piSubmit(){
   $.ajax({
     type: 'POST',
     url: '/pisubmit/' + $('#cvID').text(),
-    data: JSON.stringify(piData),
+    data: JSON.stringify(personalInfoData),
     contentType: 'application/json',
     dataType: 'json',
     success: function(data){
@@ -133,5 +142,61 @@ function piSubmit(){
 
 }
 
+
+//Personal statement function
+function psSubmit(){
+
+  var personalStatementInfo = {
+    thePersonalStatement: $('#PSInput').val()
+  }
+
+  $.ajax({
+    type: 'POST',
+    url: '/pssubmit/' + $('#cvID').text(),
+    data: JSON.stringify(personalStatementInfo),
+    contentType: 'application/json',
+    dataType: 'json',
+    success: function(data){
+       
+    },
+    error: function(err){
+      alert(err);
+    }
+  });
+}
+
+
+//Experience function
+
+function expSubmit(){
+
+  var experienceInfo = {
+    theExpCategory: $('#expCategory').val(),
+    theExpRole: $('#expRole').val(),
+    theExpCompanyDescription: $('#expCompanyDescription').val(),
+    theExpCompany: $('#expCompany').val(),
+    theExpCity: $('#expCity').val(),
+    theExpCountry: $('#expCountry').val(),
+    theExpStartDate: $('#expStartDate').val(),
+    theExpStartYear: $('#expStartYear').val(),
+    theExpEndDate: $('#expEndDate').val(),
+    theExpEndYear: $('#expEndYear').val()
+  }
+
+  $.ajax({
+    type: 'POST',
+    url: '/expsubmit/' + $('#cvID').text(),
+    data: JSON.stringify(experienceInfo),
+    contentType: 'application/json',
+    dataType: 'json',
+    success: function(data){
+      alert(JSON.stringify(data));
+    },
+    error: function(err){
+      alert(err);
+    }
+  });
+
+}
 
 
